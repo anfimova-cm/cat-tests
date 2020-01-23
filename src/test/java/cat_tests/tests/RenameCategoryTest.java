@@ -7,10 +7,10 @@ public class RenameCategoryTest extends TestBase {
 
     @Test
     public void renameCategoryTest() {
-        app.gotoCouponsPage();
+        app.getCategoryNavigationHelper().gotoCouponsCategory();
         app.gotoCategorySettings("coupon_Тест");
         app.renameCategory("Test Renamed");
-        app.gotoCouponsPage();
+        app.getCategoryNavigationHelper().gotoCouponsCategory();
         // assert
     }
 

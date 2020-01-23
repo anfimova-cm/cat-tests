@@ -3,59 +3,87 @@ package cat_tests.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.util.concurrent.TimeUnit;
 
-public class ApplicationManager extends SectionNavigationHelper {
+public class ApplicationManager {
+
+    private ChromeDriver driver;
+    private JavascriptExecutor js;
+    private WebDriverWait wait;
+    private CategoryNavigationHelper categoryNavigationHelper;
+
+    public void init() {
+        driver = new ChromeDriver();
+        categoryNavigationHelper = new CategoryNavigationHelper(driver);
+        // тут было js = (JavascriptExecutor) driver, но он redundant
+        js = driver;
+        wait = new WebDriverWait(driver, 10);
+
+        driver.manage().window().maximize();
+        driver.get("https://catalog-administration-tool-gogol.web-dev.cardsmobile.ru/catalog");
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    }
+
+    public void stop() {
+        driver.quit();
+    }
+
+    public void gotoMainSection() {
+        driver.findElement(By.xpath(".//a[@href='/catalog']")).click();
+    }
 
     public void renameCategory(String renameTo) {
-        sessionHelper.driver.findElement(By.xpath(".//label[contains(@class, 'text-field')]" +
+        driver.findElement(By.xpath(".//label[contains(@class, 'text-field')]" +
                 "//div[text()='Заголовок']/../input")).clear();
-        sessionHelper.driver.findElement(By.xpath(".//label[contains(@class, 'text-field')]" +
+        driver.findElement(By.xpath(".//label[contains(@class, 'text-field')]" +
                 "//div[text()='Заголовок']/../input")).sendKeys(renameTo);
-        sessionHelper.driver.findElement(By.xpath(".//div[contains(@class, 'view-menu-panel')]" +
+        driver.findElement(By.xpath(".//div[contains(@class, 'view-menu-panel')]" +
                 "//*[text()='Сохранить изменения']")).click();
     }
 
     public void gotoCategorySettings(String categoryId) {
-        sessionHelper.driver.findElement(By.xpath(".//a[@href='/catalog/categories/" + categoryId + "']")).click();
+        driver.findElement(By.xpath(".//a[@href='/catalog/categories/" + categoryId + "']")).click();
     }
 
     public void showAllCategory(final String categoryName) {
-        sessionHelper.driver.findElement(By.xpath(".//div[contains(@class, 'category-folding-card')]" +
+        driver.findElement(By.xpath(".//div[contains(@class, 'category-folding-card')]" +
                 "//*[text()='" + categoryName + "']")).click();
-        sessionHelper.driver.findElement(By.xpath(".//div[contains(@class, 'category-folding-card')]" +
+        driver.findElement(By.xpath(".//div[contains(@class, 'category-folding-card')]" +
                 "//*[text()='Показать все']")).click();
     }
 
     public void selectShowcase(final String marketEntityName) {
 //        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//div[contains(@class, 'entity-card')]//*[text()='" +
 //                marketEntityName + "']")));
-        WebElement element = sessionHelper.driver.findElement(By.xpath(".//div[contains(@class, 'entity-card')]//*[text()='" +
+        WebElement element = driver.findElement(By.xpath(".//div[contains(@class, 'entity-card')]//*[text()='" +
                 marketEntityName + "']"));
-        ((JavascriptExecutor) sessionHelper.driver).executeScript("arguments[0].scrollIntoView(true)", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
 //        driver.findElement(By.xpath(".//div[contains(@class, 'entity-card')]//*[text()='" +
 //                marketEntityName + "']")).click();
         element.click();
     }
 
     public void openMarketEntityPage() {
-        sessionHelper.driver.findElement(By.linkText("Перейти")).click();
+        driver.findElement(By.linkText("Перейти")).click();
     }
 
     public void setShowNever() {
-        sessionHelper.driver.findElement(By.xpath(".//div[contains(@class, 'section-card')]//*[text()='Закрыть для всех']")).click();
+        driver.findElement(By.xpath(".//div[contains(@class, 'section-card')]//*[text()='Закрыть для всех']")).click();
     }
 
-    public void saveChanges() {
-        sessionHelper.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//button[text()='Сохранить изменения']")));
-        sessionHelper.driver.findElement(By.xpath(".//button[text()='Сохранить изменения']")).click();
+    public void saveMarketEntityChanges() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//button[text()='Сохранить изменения']")));
+        driver.findElement(By.xpath(".//button[text()='Сохранить изменения']")).click();
     }
 
     public void scrollPage() {
-        sessionHelper.js.executeScript("window.scrollTo(0,0)");
+        js.executeScript("window.scrollTo(0,0)");
     }
 
-    public SessionHelper getSessionHelper() {
-        return sessionHelper;
+    public CategoryNavigationHelper getCategoryNavigationHelper() {
+        return categoryNavigationHelper;
     }
 }

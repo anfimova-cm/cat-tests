@@ -7,12 +7,12 @@ public class SetFilterToMarketEntityTest extends TestBase {
 
     @Test
     public void setFilterTest() {
-        app.gotoDiscountPage();
+        app.getCategoryNavigationHelper().gotoDiscountCategory();
         app.showAllCategory("RMC");
         app.selectShowcase("Золотой телец");
         app.openMarketEntityPage();
         app.setShowNever();
-        app.saveChanges();
+        app.saveMarketEntityChanges();
     }
 
 
