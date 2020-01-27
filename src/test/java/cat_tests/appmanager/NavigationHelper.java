@@ -3,11 +3,19 @@ package cat_tests.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class CategoryNavigationHelper {
+public class NavigationHelper {
     private ChromeDriver driver;
 
-    public CategoryNavigationHelper(ChromeDriver driver) {
+    public NavigationHelper(ChromeDriver driver) {
         this.driver = driver;
+    }
+
+    public void scrollPage() {
+        driver.executeScript("window.scrollTo(0,0)");
+    }
+
+    public void gotoMainSection() {
+        driver.findElement(By.xpath(".//a[@href='/catalog']")).click();
     }
 
     public void gotoDiscountCategory() {
