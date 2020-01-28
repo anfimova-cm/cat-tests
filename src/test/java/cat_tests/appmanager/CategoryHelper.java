@@ -23,7 +23,7 @@ public class CategoryHelper {
         driver.findElement(By.xpath(".//a[@href='/catalog/categories/" + categoryId + "']")).click();
     }
 
-    public void showAllCategory(final String categoryName) {
+    public void showCategory(final String categoryName) {
         driver.findElement(By.xpath(".//div[contains(@class, 'category-folding-card')]" +
                 "//*[text()='" + categoryName + "']")).click();
         driver.findElement(By.xpath(".//div[contains(@class, 'category-folding-card')]" +
