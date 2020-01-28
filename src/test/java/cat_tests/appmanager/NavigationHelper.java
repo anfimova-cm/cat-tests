@@ -14,19 +14,23 @@ public class NavigationHelper {
         driver.executeScript("window.scrollTo(0,0)");
     }
 
-    public void gotoMainSection() {
+    public void gotoCatalogPage() {
         driver.findElement(By.xpath(".//a[@href='/catalog']")).click();
     }
 
-    public void gotoDiscountCategory() {
-        driver.findElement(By.xpath(".//a[@href='/catalog']")).click();
+    public void openSectionMenu() {
         driver.findElement(By.xpath(".//div[contains(@class, 'view-menu-panel')]//*[text()='Главная']")).click();
+    }
+
+    public void gotoDiscountCategory() {
+        gotoCatalogPage();
+        openSectionMenu();
         driver.findElement(By.xpath(".//button[contains(@class, 'drop-menu')]//*[text()='Карты']")).click();
     }
 
     public void gotoCouponsCategory() {
-        driver.findElement(By.xpath(".//a[@href='/catalog']")).click();
-        driver.findElement(By.xpath(".//div[contains(@class, 'view-menu-panel')]//*[text()='Главная']")).click();
+        gotoCatalogPage();
+        openSectionMenu();
         driver.findElement(By.xpath(".//button[contains(@class, 'drop-menu')]//*[text()='Скидки']")).click();
     }
 }

@@ -10,12 +10,12 @@ public class TestBase {
 
     @BeforeMethod
     public void setUp() {
-        app.getSessionHelper().init();
+        app.init();
     }
 
     @AfterMethod
     public void tearDown() {
-        app.getSessionHelper().stop();
+        app.stop();
     }
 
 }

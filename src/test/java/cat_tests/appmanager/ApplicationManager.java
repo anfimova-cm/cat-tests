@@ -6,8 +6,6 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
 
     private ChromeDriver driver;
-    //private JavascriptExecutor js;
-
     private MarketEntityHelper marketEntityHelper;
     private NavigationHelper navigationHelper;
     private CategoryHelper categoryHelper;
@@ -16,8 +14,6 @@ public class ApplicationManager {
 
     public void init() {
         driver = new ChromeDriver();
-        //js = (JavascriptExecutor) driver;
-
         navigationHelper = new NavigationHelper(driver);
         categoryHelper = new CategoryHelper(driver);
         marketEntityHelper = new MarketEntityHelper(driver);

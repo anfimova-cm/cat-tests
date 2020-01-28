@@ -12,6 +12,7 @@ public class MarketEntityHelper {
 
     public MarketEntityHelper(ChromeDriver driver) {
         this.driver = driver;
+        wait = new WebDriverWait(driver, 10);
     }
 
     public void openMarketEntityPage() {
@@ -19,7 +20,11 @@ public class MarketEntityHelper {
     }
 
     public void saveMarketEntityChanges() {
-        wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//button[text()='Сохранить изменения']")));
+        driver.findElement(By.xpath(".//button[text()='Сохранить изменения']")).click();
+    }
+
+    public void saveMarketEntityChanges1() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//button[text()='Сохранить изменения']")));
         driver.findElement(By.xpath(".//button[text()='Сохранить изменения']")).click();
     }
