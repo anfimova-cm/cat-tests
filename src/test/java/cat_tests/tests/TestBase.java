@@ -1,4 +1,4 @@
-package cat_tests.model;
+package cat_tests.tests;
 
 import cat_tests.appmanager.ApplicationManager;
 import org.testng.annotations.AfterMethod;

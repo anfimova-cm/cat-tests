@@ -3,11 +3,10 @@ package cat_tests.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class NavigationHelper {
-    private ChromeDriver driver;
+public class NavigationHelper extends HelperBase {
 
     public NavigationHelper(ChromeDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void scrollPage() {
@@ -15,22 +14,17 @@ public class NavigationHelper {
     }
 
     public void gotoCatalogPage() {
-        driver.findElement(By.xpath(".//a[@href='/catalog']")).click();
+        click(By.xpath(".//a[@href='/catalog']"));
     }
 
     public void openSectionMenu() {
-        driver.findElement(By.xpath(".//div[contains(@class, 'view-menu-panel')]//*[text()='Главная']")).click();
+        click(By.xpath(".//div[contains(@class, 'view-menu-panel')]//*[text()='Главная']"));
     }
 
-    public void gotoDiscountCategory() {
-        gotoCatalogPage();
-        openSectionMenu();
-        driver.findElement(By.xpath(".//button[contains(@class, 'drop-menu')]//*[text()='Карты']")).click();
+    public void gotoSection(String sectionName) {
+        click(By.xpath(".//a[@href='/catalog']"));
+        click(By.xpath(".//div[contains(@class, 'view-menu-panel')]//*[text()='Главная']"));
+        click(By.xpath(".//button[contains(@class, 'drop-menu')]//*[text()='" + sectionName + "']"));
     }
 
-    public void gotoCouponsCategory() {
-        gotoCatalogPage();
-        openSectionMenu();
-        driver.findElement(By.xpath(".//button[contains(@class, 'drop-menu')]//*[text()='Скидки']")).click();
-    }
 }

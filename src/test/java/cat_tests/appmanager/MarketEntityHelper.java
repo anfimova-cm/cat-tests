@@ -5,28 +5,27 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class MarketEntityHelper {
+public class MarketEntityHelper extends HelperBase {
 
-    private ChromeDriver driver;
     private WebDriverWait wait;
 
     public MarketEntityHelper(ChromeDriver driver) {
-        this.driver = driver;
+        super(driver);
         wait = new WebDriverWait(driver, 10);
     }
 
     public void openMarketEntityPage() {
-        driver.findElement(By.linkText("Перейти")).click();
+        click(By.linkText("Перейти"));
     }
 
     public void saveMarketEntityChanges() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//button[text()='Сохранить изменения']")));
-        driver.findElement(By.xpath(".//button[text()='Сохранить изменения']")).click();
+        click(By.xpath(".//button[text()='Сохранить изменения']"));
     }
 
     public void saveMarketEntityChanges1() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//button[text()='Сохранить изменения']")));
-        driver.findElement(By.xpath(".//button[text()='Сохранить изменения']")).click();
+        click(By.xpath(".//button[text()='Сохранить изменения']"));
     }
 
 }

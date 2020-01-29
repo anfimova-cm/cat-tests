@@ -1,13 +1,12 @@
 package cat_tests.tests;
 
-import cat_tests.model.TestBase;
 import org.testng.annotations.Test;
 
 public class SetFilterToMarketEntityTest extends TestBase {
 
     @Test
     public void setFilterTest() {
-        app.getNavigationHelper().gotoDiscountCategory();
+        app.getNavigationHelper().gotoSection("Карты");
         app.getCategoryHelper().showCategory("RMC");
         app.getShowcaseHelper().selectShowcase("Золотой телец");
         app.getMarketEntityHelper().openMarketEntityPage();
