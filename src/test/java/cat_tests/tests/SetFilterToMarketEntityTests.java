@@ -2,7 +2,7 @@ package cat_tests.tests;
 
 import org.testng.annotations.Test;
 
-public class SetFilterToMarketEntityTest extends TestBase {
+public class SetFilterToMarketEntityTests extends TestBase {
 
     @Test
     public void setFilterTest() {

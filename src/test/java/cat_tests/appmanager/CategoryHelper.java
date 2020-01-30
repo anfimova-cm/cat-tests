@@ -14,8 +14,9 @@ public class CategoryHelper extends HelperBase {
         click(By.xpath(".//div[contains(@class, 'view-menu-panel')]//*[text()='Сохранить изменения']"));
     }
 
-    public void gotoCategorySettings(String categoryId) {
-        click(By.xpath(".//a[@href='/catalog/categories/" + categoryId + "']"));
+    public void gotoCategorySettings(String categoryName) {
+        click(By.xpath(".//div[contains(@class, 'category-folding-card')]//div[text()='"
+                + categoryName + "']/..//..//a[contains(@href, '/catalog/categories/')]"));
     }
 
     public void showCategory(String categoryName) {
