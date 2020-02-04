@@ -1,6 +1,7 @@
 package cat_tests.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class CategoryHelper extends HelperBase {
@@ -20,7 +21,13 @@ public class CategoryHelper extends HelperBase {
     }
 
     public void showCategory(String categoryName) {
-        click(By.xpath(".//div[contains(@class, 'category-folding-card')]//*[text()='" + categoryName + "']"));
-        click(By.xpath(".//div[contains(@class, 'category-folding-card')]//*[text()='Показать все']"));
+        if (isElementPresent(By.xpath(".//div[contains(@class, 'category-folding-card')]//*[text()='" + categoryName + "']"))) {
+            click(By.xpath(".//div[contains(@class, 'category-folding-card')]//*[text()='" + categoryName + "']"));
+            click(By.xpath(".//div[contains(@class, 'category-folding-card')]//*[text()='Показать все']"));
+        }
+    }
+
+    public void createCategory(String categoryName) {
+        // TODO
     }
 }
