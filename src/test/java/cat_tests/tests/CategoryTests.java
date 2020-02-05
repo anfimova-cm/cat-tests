@@ -1,6 +1,5 @@
 package cat_tests.tests;
 
-import cat_tests.appmanager.HelperBase;
 import org.testng.annotations.Test;
 
 public class CategoryTests extends TestBase {

@@ -1,7 +1,9 @@
 package cat_tests.appmanager;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.List;
 
 public class NavigationHelper extends HelperBase {
 
@@ -9,22 +11,25 @@ public class NavigationHelper extends HelperBase {
         super(driver);
     }
 
-    public void scrollPage() {
-        driver.executeScript("window.scrollTo(0,0)");
-    }
-
     public void gotoCatalogPage() {
-        click(By.xpath(".//a[@href='/catalog']"));
+        click(catalog_main_page_locator);
     }
 
     public void openSectionMenu() {
-        click(By.xpath(".//div[contains(@class, 'view-menu-panel')]//*[text()='Главная']"));
+        click(section_menu_locator);
     }
 
     public void gotoSection(String sectionName) {
-        click(By.xpath(".//a[@href='/catalog']"));
-        click(By.xpath(".//div[contains(@class, 'view-menu-panel')]//*[text()='Главная']"));
-        click(By.xpath(".//button[contains(@class, 'drop-menu')]//*[text()='" + sectionName + "']"));
+        gotoCatalogPage();
+        openSectionMenu();
+        List<WebElement> list = driver.findElements(section_name_locator);
+            for (int i=0; i<list.size(); i++) {
+                String name = list.get(i).getText();
+                if (name.equalsIgnoreCase(sectionName)) {
+                    list.get(i).click();
+                    break;
+                }
+            }
     }
 
 }

@@ -1,10 +1,11 @@
 package cat_tests.appmanager;
 
+import cat_tests.pages.CommonPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class HelperBase {
+public class HelperBase extends CommonPage {
 
     protected ChromeDriver driver;
 
@@ -12,21 +13,22 @@ public class HelperBase {
         this.driver = driver;
     }
 
-    protected void click(By xpath) {
-        driver.findElement(xpath).click();
+    protected void click(By locator) {
+        driver.findElement(locator).click();
     }
 
-    protected void type(By xpath, String text) {
-        driver.findElement(xpath).clear();
-        driver.findElement(xpath).sendKeys(text);
+    protected void type(By locator, String text) {
+        driver.findElement(locator).clear();
+        driver.findElement(locator).sendKeys(text);
     }
 
-    protected boolean isElementPresent(By xpath) {
+    protected boolean isElementPresent(By locator) {
         try {
-            driver.findElement(xpath);
+            driver.findElement(locator);
             return true;
         } catch ( NoSuchElementException ex) {
             return false;
         }
     }
+
 }
