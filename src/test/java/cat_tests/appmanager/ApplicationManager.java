@@ -22,7 +22,7 @@ public class ApplicationManager {
 
         driver.manage().window().maximize();
         driver.get("https://catalog-administration-tool-gogol.web-dev.cardsmobile.ru/catalog");
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     }
 
     public void stop() {

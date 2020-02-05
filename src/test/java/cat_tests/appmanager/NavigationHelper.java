@@ -16,13 +16,13 @@ public class NavigationHelper extends HelperBase {
     }
 
     public void openSectionMenu() {
-        click(section_menu_locator);
+        click(sectionPage.main_menu_locator);
     }
 
     public void gotoSection(String sectionName) {
         gotoCatalogPage();
         openSectionMenu();
-        List<WebElement> list = driver.findElements(section_name_locator);
+        List<WebElement> list = driver.findElements(sectionPage.name_locator);
             for (int i=0; i<list.size(); i++) {
                 String name = list.get(i).getText();
                 if (name.equalsIgnoreCase(sectionName)) {

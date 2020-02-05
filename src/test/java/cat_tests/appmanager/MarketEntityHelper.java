@@ -7,11 +7,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MarketEntityHelper extends HelperBase {
 
-    private WebDriverWait wait;
+    //private WebDriverWait wait;
 
     public MarketEntityHelper(ChromeDriver driver) {
         super(driver);
-        wait = new WebDriverWait(driver, 10);
+        //wait = new WebDriverWait(driver, 10);
     }
 
     public void openMarketEntityPage() {
@@ -19,12 +19,7 @@ public class MarketEntityHelper extends HelperBase {
     }
 
     public void saveMarketEntityChanges() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//button[text()='Сохранить изменения']")));
-        click(By.xpath(".//button[text()='Сохранить изменения']"));
-    }
-
-    public void saveMarketEntityChanges1() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//button[text()='Сохранить изменения']")));
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//button[text()='Сохранить изменения']")));
         click(By.xpath(".//button[text()='Сохранить изменения']"));
     }
 
