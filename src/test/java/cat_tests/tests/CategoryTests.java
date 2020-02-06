@@ -1,6 +1,7 @@
 package cat_tests.tests;
 
 import cat_tests.model.CategoryData;
+import cat_tests.model.SectionData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -11,24 +12,38 @@ public class CategoryTests extends TestBase {
     @Test
     public void renameCategoryTest() {
 
-        // проверка, если нет - создание
+        // TODO: проверка наличия категории, если нет - создание
 
-        app.getNavigationHelper().gotoSection("Скидки");
-        List<CategoryData> before = app.getCategoryHelper().getCategoryList();
+        SectionData section = new SectionData("Скидки");
 
-        app.getCategoryHelper().gotoCategorySettings(new CategoryData("Test"));
-        app.getCategoryHelper().renameCategory("Test Renamed");
-        app.getNavigationHelper().gotoSection("Скидки");
+        CategoryData category = new CategoryData("Test");
+        final String name = category.getName();
+        final String rename = "Test Renamed";
 
-        List<CategoryData> after = app.getCategoryHelper().getCategoryList();
-        Assert.assertEquals(before.size(), after.size());
+        app.getNavigationHelper().gotoSection(section);
+        List<CategoryData> beforeAll = app.getCategoryHelper().getCategoryList();
 
-        // assert новое имя = желаемое
-        // переименовать обратно
+        app.getCategoryHelper().gotoCategorySettings(category);
+        app.getCategoryHelper().renameCategory(rename);
+        category.setName(rename);
 
-        // Сравнивать HashSet - неупорядоченные
-        // Assert.assertNotEquals(new HashSet<Object>(before), new HashSet<Object>(after));
-        Assert.assertNotEquals(before, after);
+        app.getNavigationHelper().gotoSection(section);
+        List<CategoryData> afterRename = app.getCategoryHelper().getCategoryList();
+        Assert.assertEquals(beforeAll.size(), afterRename.size());
+        // TODO: Проверить, что новое имя есть в списке и = желаемое
+        Assert.assertNotEquals(beforeAll, afterRename);
+
+        // Переименование обратно
+        app.getCategoryHelper().gotoCategorySettings(category);
+        app.getCategoryHelper().renameCategory(name);
+        category.setName(name);
+        app.getNavigationHelper().gotoSection(section);
+
+        // Сравнивать HashSet - неупорядоченные, List - упорядоченные (одинаковые схлопываются)
+        // Assert.assertNotEquals(new HashSet<Object>(beforeAll), new HashSet<Object>(afterRename));
+        List<CategoryData> afterAll = app.getCategoryHelper().getCategoryList();
+        Assert.assertEquals(beforeAll.size(), afterAll.size());
+        Assert.assertEquals(beforeAll, afterAll);
 
     }
 

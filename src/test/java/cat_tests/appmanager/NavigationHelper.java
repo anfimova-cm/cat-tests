@@ -1,5 +1,6 @@
 package cat_tests.appmanager;
 
+import cat_tests.model.SectionData;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -19,17 +20,16 @@ public class NavigationHelper extends HelperBase {
         click(sectionPage.main_menu_locator);
     }
 
-    public void gotoSection(String sectionName) {
+    public void gotoSection(SectionData section) {
         gotoCatalogPage();
         openSectionMenu();
-        List<WebElement> list = driver.findElements(sectionPage.name_locator);
-            for (int i=0; i<list.size(); i++) {
-                String name = list.get(i).getText();
-                if (name.equalsIgnoreCase(sectionName)) {
-                    list.get(i).click();
-                    break;
-                }
+        List<WebElement> names = driver.findElements(sectionPage.name_locator);
+        for (WebElement name : names) {
+            if (name.getText().equalsIgnoreCase(section.getName())) {
+                name.click();
+                break;
             }
+        }
     }
 
 }

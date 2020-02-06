@@ -21,8 +21,7 @@ public class CategoryHelper extends HelperBase {
     public void gotoCategorySettings(CategoryData category) {
         List<WebElement> names = driver.findElements(categoryPage.name_locator);
         for (int i=0; i<names.size(); i++) {
-            String name = names.get(i).getText();
-            if (name.equalsIgnoreCase(category.getCategoryName())) {
+            if (names.get(i).getText().equalsIgnoreCase(category.getName())) {
                 List<WebElement> settings = driver.findElements(categoryPage.settings_locator);
                 settings.get(i).click();
                 break;
@@ -30,11 +29,10 @@ public class CategoryHelper extends HelperBase {
         }
     }
 
-    public void showCategory(String categoryName) {
+    public void showCategory(CategoryData category) {
     }
 
-    public void createCategory(String categoryName) {
-        // TODO
+    public void createCategory(CategoryData category) {
     }
 
     public int getCategoryCount() {
