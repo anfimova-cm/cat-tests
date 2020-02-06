@@ -29,7 +29,11 @@ public class Notes {
     Actions actions = new Actions(driver);
     actions.moveToElement(element).perform();
 
+    ---------------
 
-     */
+    Сравнивать HashSet - неупорядоченные, List - упорядоченные (одинаковые схлопываются)
+    Assert.assertNotEquals(new HashSet<Object>(beforeAll), new HashSet<Object>(afterRename));
+
+    */
 
 }

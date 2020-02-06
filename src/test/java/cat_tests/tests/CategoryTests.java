@@ -22,26 +22,25 @@ public class CategoryTests extends TestBase {
 
         app.getNavigationHelper().gotoSection(section);
         List<CategoryData> beforeAll = app.getCategoryHelper().getCategoryList();
-
         app.getCategoryHelper().gotoCategorySettings(category);
         app.getCategoryHelper().renameCategory(rename);
         category.setName(rename);
 
+        // Проверка
         app.getNavigationHelper().gotoSection(section);
         List<CategoryData> afterRename = app.getCategoryHelper().getCategoryList();
         Assert.assertEquals(beforeAll.size(), afterRename.size());
-        // TODO: Проверить, что новое имя есть в списке и = желаемое
-        // А просто что не равны
-        Assert.assertNotEquals(beforeAll, afterRename);
+
+        // Категория с новым именем есть в списке категорий
+        Assert.assertEquals(app.getCategoryHelper().searchRenamedCategory(category), rename);
 
         // Переименование обратно
         app.getCategoryHelper().gotoCategorySettings(category);
         app.getCategoryHelper().renameCategory(name);
         category.setName(name);
-        app.getNavigationHelper().gotoSection(section);
 
-        // Сравнивать HashSet - неупорядоченные, List - упорядоченные (одинаковые схлопываются)
-        // Assert.assertNotEquals(new HashSet<Object>(beforeAll), new HashSet<Object>(afterRename));
+        // Проверка, что всё осталось как было до переименования
+        app.getNavigationHelper().gotoSection(section);
         List<CategoryData> afterAll = app.getCategoryHelper().getCategoryList();
         Assert.assertEquals(beforeAll.size(), afterAll.size());
         Assert.assertEquals(beforeAll, afterAll);

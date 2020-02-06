@@ -49,4 +49,16 @@ public class CategoryHelper extends HelperBase {
         }
         return categories;
     }
+
+    public String searchRenamedCategory(CategoryData category) {
+        List<WebElement> names = driver.findElements(getCategoryPage().name_locator);
+        String name = "";
+        for (WebElement element : names) {
+            if (element.getText().equalsIgnoreCase(category.getName())) {
+                name = element.getText();
+                break;
+            }
+        }
+        return name;
+    }
 }
