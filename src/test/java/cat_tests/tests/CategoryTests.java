@@ -31,6 +31,7 @@ public class CategoryTests extends TestBase {
         List<CategoryData> afterRename = app.getCategoryHelper().getCategoryList();
         Assert.assertEquals(beforeAll.size(), afterRename.size());
         // TODO: Проверить, что новое имя есть в списке и = желаемое
+        // А просто что не равны
         Assert.assertNotEquals(beforeAll, afterRename);
 
         // Переименование обратно

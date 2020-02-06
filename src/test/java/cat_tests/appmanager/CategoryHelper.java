@@ -14,15 +14,15 @@ public class CategoryHelper extends HelperBase {
     }
 
     public void renameCategory(String renameTo) {
-        type(categoryPage.header_locator, renameTo);
-        click(categoryPage.save_changes_locator);
+        type(getCategoryPage().header_locator, renameTo);
+        click(getCategoryPage().save_changes_locator);
     }
 
     public void gotoCategorySettings(CategoryData category) {
-        List<WebElement> names = driver.findElements(categoryPage.name_locator);
+        List<WebElement> names = driver.findElements(getCategoryPage().name_locator);
         for (int i=0; i<names.size(); i++) {
             if (names.get(i).getText().equalsIgnoreCase(category.getName())) {
-                List<WebElement> settings = driver.findElements(categoryPage.settings_locator);
+                List<WebElement> settings = driver.findElements(getCategoryPage().settings_locator);
                 settings.get(i).click();
                 break;
             }
@@ -36,12 +36,12 @@ public class CategoryHelper extends HelperBase {
     }
 
     public int getCategoryCount() {
-        return driver.findElements(categoryPage.name_locator).size();
+        return driver.findElements(getCategoryPage().name_locator).size();
     }
 
     public List<CategoryData> getCategoryList() {
         List<CategoryData> categories = new ArrayList<>();
-        List<WebElement> elements = driver.findElements(categoryPage.name_locator);
+        List<WebElement> elements = driver.findElements(getCategoryPage().name_locator);
         for (WebElement element : elements) {
             String name = element.getText();
             CategoryData category = new CategoryData(name);

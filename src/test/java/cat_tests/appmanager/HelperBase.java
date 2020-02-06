@@ -1,11 +1,11 @@
 package cat_tests.appmanager;
 
-import cat_tests.pages.CommonPage;
+import cat_tests.pages.PageBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class HelperBase extends CommonPage {
+public class HelperBase extends PageBase {
 
     protected ChromeDriver driver;
 

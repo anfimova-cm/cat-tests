@@ -14,5 +14,6 @@ public class CategoryPage {
             By.xpath(".//label[contains(@class, 'text-field')]//div[text()='Заголовок']/../input");
     public final By save_changes_locator =
             By.xpath(".//div[contains(@class, 'view-menu-panel')]//*[text()='Сохранить изменения']");
+    public final By open_me_page_locator = By.linkText("Перейти");
 
 }

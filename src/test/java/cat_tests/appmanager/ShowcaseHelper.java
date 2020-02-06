@@ -1,6 +1,6 @@
 package cat_tests.appmanager;
 
-import org.openqa.selenium.By;
+import cat_tests.model.ShowcaseData;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ShowcaseHelper extends HelperBase {
@@ -9,8 +9,8 @@ public class ShowcaseHelper extends HelperBase {
         super(driver);
     }
 
-    public void selectShowcase(String offerName) {
-        click(By.xpath(".//div[contains(@class, 'entity-card')]/div[contains(text(), '" + offerName + "')]/.."));
+    public void selectShowcase(ShowcaseData showcase) {
+//        click(By.xpath(".//div[contains(@class, 'entity-card')]/div[contains(text(), '" + offerName + "')]/.."));
     }
 
 }

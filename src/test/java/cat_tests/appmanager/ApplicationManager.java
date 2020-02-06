@@ -3,7 +3,7 @@ package cat_tests.appmanager;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
-public class ApplicationManager {
+public abstract class ApplicationManager {
 
     private ChromeDriver driver;
     private MarketEntityHelper marketEntityHelper;
