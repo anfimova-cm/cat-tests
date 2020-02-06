@@ -29,11 +29,11 @@ public class ApplicationManager {
         driver.quit();
     }
 
-    public NavigationHelper getNavigationHelper() {
+    public NavigationHelper goTo() {
         return navigationHelper;
     }
 
-    public CategoryHelper getCategoryHelper() {
+    public CategoryHelper category() {
         return categoryHelper;
     }
 

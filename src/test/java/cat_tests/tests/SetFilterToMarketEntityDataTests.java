@@ -7,15 +7,15 @@ import org.testng.annotations.Test;
 
 public class SetFilterToMarketEntityDataTests extends TestBase {
 
-    @Test
+    @Test (enabled = false)
     public void setFilterTest() {
 
         SectionData section = new SectionData("Карты");
         CategoryData category = new CategoryData("RMC");
         ShowcaseData showcase = new ShowcaseData("Золотой телец");
 
-        app.getNavigationHelper().gotoSection(section);
-        app.getCategoryHelper().showCategory(category);
+        app.goTo().openSection(section);
+        app.category().showCategory(category);
         app.getShowcaseHelper().selectShowcase(showcase);
         app.getMarketEntityHelper().openMarketEntityPage();
         app.getTargetingHelper().setShowNever();

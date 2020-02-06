@@ -20,8 +20,8 @@ public class NavigationHelper extends HelperBase {
         click(getSectionPage().main_menu_locator);
     }
 
-    public void gotoSection(SectionData section) {
-        gotoCatalogPage();
+    public void openSection(SectionData section) {
+        //gotoCatalogPage();
         openSectionMenu();
         List<WebElement> names = driver.findElements(getSectionPage().name_locator);
         for (WebElement name : names) {

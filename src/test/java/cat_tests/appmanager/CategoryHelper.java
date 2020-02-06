@@ -13,12 +13,12 @@ public class CategoryHelper extends HelperBase {
         super(driver);
     }
 
-    public void renameCategory(String renameTo) {
+    public void rename(String renameTo) {
         type(getCategoryPage().header_locator, renameTo);
         click(getCategoryPage().save_changes_locator);
     }
 
-    public void gotoCategorySettings(CategoryData category) {
+    public void settings(CategoryData category) {
         List<WebElement> names = driver.findElements(getCategoryPage().name_locator);
         for (int i=0; i<names.size(); i++) {
             if (names.get(i).getText().equalsIgnoreCase(category.getName())) {
@@ -39,7 +39,7 @@ public class CategoryHelper extends HelperBase {
         return driver.findElements(getCategoryPage().name_locator).size();
     }
 
-    public List<CategoryData> getCategoryList() {
+    public List<CategoryData> list() {
         List<CategoryData> categories = new ArrayList<>();
         List<WebElement> elements = driver.findElements(getCategoryPage().name_locator);
         for (WebElement element : elements) {

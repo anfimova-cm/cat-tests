@@ -3,11 +3,20 @@ package cat_tests.tests;
 import cat_tests.model.CategoryData;
 import cat_tests.model.SectionData;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class CategoryTests extends TestBase {
+
+    @BeforeMethod
+    public void ensurePreconditions() {
+
+    }
 
     @Test
     public void renameCategoryTest() {
@@ -18,30 +27,31 @@ public class CategoryTests extends TestBase {
 
         CategoryData category = new CategoryData("Test");
         final String name = category.getName();
-        final String rename = "Test Renamed";
+        final String toName = "Test Renamed";
 
-        app.getNavigationHelper().gotoSection(section);
-        List<CategoryData> beforeAll = app.getCategoryHelper().getCategoryList();
-        app.getCategoryHelper().gotoCategorySettings(category);
-        app.getCategoryHelper().renameCategory(rename);
-        category.setName(rename);
+        app.goTo().openSection(section);
+        List<CategoryData> beforeAll = app.category().list();
+        app.category().settings(category);
+        app.category().rename(toName);
+        category.setName(toName);
 
         // Проверка
-        app.getNavigationHelper().gotoSection(section);
-        List<CategoryData> afterRename = app.getCategoryHelper().getCategoryList();
+        app.goTo().openSection(section);
+        List<CategoryData> afterRename = app.category().list();
         Assert.assertEquals(beforeAll.size(), afterRename.size());
 
         // Категория с новым именем есть в списке категорий
-        Assert.assertEquals(app.getCategoryHelper().searchRenamedCategory(category), rename);
+        Assert.assertEquals(app.category().searchRenamedCategory(category), toName);
+        assertThat(app.category().searchRenamedCategory(category), equalTo(toName));
 
         // Переименование обратно
-        app.getCategoryHelper().gotoCategorySettings(category);
-        app.getCategoryHelper().renameCategory(name);
+        app.category().settings(category);
+        app.category().rename(name);
         category.setName(name);
 
         // Проверка, что всё осталось как было до переименования
-        app.getNavigationHelper().gotoSection(section);
-        List<CategoryData> afterAll = app.getCategoryHelper().getCategoryList();
+        app.goTo().openSection(section);
+        List<CategoryData> afterAll = app.category().list();
         Assert.assertEquals(beforeAll.size(), afterAll.size());
         Assert.assertEquals(beforeAll, afterAll);
 
