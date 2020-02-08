@@ -13,7 +13,7 @@ public class NavigationHelper extends HelperBase {
     }
 
     public void gotoCatalogPage() {
-        click(getMainPage().catalog_main_page_locator);
+        click(getMainPage().catalog_page_locator);
     }
 
     public void openSectionMenu() {
@@ -21,9 +21,8 @@ public class NavigationHelper extends HelperBase {
     }
 
     public void openSection(SectionData section) {
-        //gotoCatalogPage();
         openSectionMenu();
-        List<WebElement> names = driver.findElements(getSectionPage().name_locator);
+        List<WebElement> names = driver.findElements(getSectionPage().title_locator);
         for (WebElement name : names) {
             if (name.getText().equalsIgnoreCase(section.getName())) {
                 name.click();

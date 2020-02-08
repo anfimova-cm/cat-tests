@@ -9,7 +9,7 @@ public class MarketEntityHelper extends HelperBase {
     }
 
     public void openMarketEntityPage() {
-        click(getCategoryPage().open_me_page_locator);
+        click(getCategoryPage().target_page_locator);
     }
 
     public void saveMarketEntityChanges() {

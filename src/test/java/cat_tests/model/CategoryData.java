@@ -5,28 +5,24 @@ import java.util.Objects;
 public class CategoryData {
 
     private String name;
-    private final String id;
-
-    public CategoryData(String name) {
-        this.id = null;
-        this.name = name;
-    }
-
-    public CategoryData(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    private String id;
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public CategoryData setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getId() {
         return id;
+    }
+
+    public CategoryData setId(String id) {
+        this.id = id;
+        return this;
     }
 
     @Override

@@ -8,6 +8,7 @@ public class ApplicationManager {
     private ChromeDriver driver;
     private MarketEntityHelper marketEntityHelper;
     private NavigationHelper navigationHelper;
+    private SectionHelper sectionHelper;
     private CategoryHelper categoryHelper;
     private TargetingHelper targetingHelper;
     private ShowcaseHelper showcaseHelper;
@@ -31,6 +32,10 @@ public class ApplicationManager {
 
     public NavigationHelper goTo() {
         return navigationHelper;
+    }
+
+    public SectionHelper getSectionHelper() {
+        return sectionHelper;
     }
 
     public CategoryHelper category() {

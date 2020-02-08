@@ -2,21 +2,9 @@ package cat_tests.model;
 
 public class SectionData {
 
-    private final String id;
+    private String id;
     private String name;
     private String url;
-
-    public SectionData(String name) {
-        this.id = null;
-        this.name = name;
-        this.url = null;
-    }
-
-    public SectionData(String id, String name, String url) {
-        this.id = id;
-        this.name = name;
-        this.url = url;
-    }
 
     public String getId() {
         return id;
@@ -26,12 +14,23 @@ public class SectionData {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getUrl() {
         return url;
+    }
+
+    public SectionData setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public SectionData setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    public SectionData setUrl(String url) {
+        this.url = url;
+        return this;
     }
 
 }
