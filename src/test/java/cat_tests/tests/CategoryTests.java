@@ -1,68 +1,52 @@
 package cat_tests.tests;
 
-import cat_tests.model.Categories;
 import cat_tests.model.CategoryData;
 import cat_tests.model.SectionData;
-import cat_tests.model.Sections;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import java.util.List;
 
 public class CategoryTests extends TestBase {
 
-    @DataProvider
-
-
-    @BeforeMethod
-    public Object[] ensurePreconditions() {
-    // TODO: проверка наличия категории, если нет - создание
-
-        return new Object[0];
-    }
-
-    @Test (enabled = false)
-    public void createCategoryTest() {
-
-    }
-
-    @Test (enabled = true)
+    @Test
     public void renameCategoryTest() {
 
-        SectionData section = new SectionData().withName("Скидки");
-        CategoryData category = new CategoryData().withName("Test");
-        String name = category.getTitle();
-        String testName = "Test Renamed";
+        // TODO: проверка наличия категории, если нет - создание
+
+        SectionData section = new SectionData("Скидки");
+
+        CategoryData category = new CategoryData("Test");
+        final String name = category.getTitle();
+        final String rename = "Test Renamed";
 
         app.section().open(section);
-        Categories beforeAll = app.category().all();
+        List<CategoryData> beforeAll = app.category().list();
         app.category().settings(category);
-        app.category().rename(category, testName);
+        app.category().rename(rename);
+        category.setTitle(rename);
 
         // Проверка
+        app.goTo().catalog();
         app.section().open(section);
-        Categories afterRename = app.category().all();
-        assertThat(beforeAll.size(), equalTo(afterRename.size()));
+        List<CategoryData> afterRename = app.category().list();
+        Assert.assertEquals(beforeAll.size(), afterRename.size());
+        // TODO: Проверить, что новое имя есть в списке и = желаемое
+        // А просто что не равны
 
-        // Категория с новым именем есть в списке категорий
-        assertThat(app.category().searchRenamed(category), equalTo(testName));
+        Assert.assertNotEquals(beforeAll, afterRename);
 
         // Переименование обратно
         app.category().settings(category);
-        app.category().rename(category, name);
-        category.withName(name);
+        app.category().rename(name);
+        category.setTitle(name);
 
         // Проверка, что всё осталось как было до переименования
+        app.goTo().catalog();
         app.section().open(section);
-        Categories afterAll = app.category().all();
-        assertThat(beforeAll.size(), equalTo(afterAll.size()));
-        assertThat(beforeAll, equalTo(afterAll));
-    }
-
-    @Test (enabled = false)
-    public void deleteCategoryTest() {
+        List<CategoryData> afterAll = app.category().list();
+        Assert.assertEquals(beforeAll.size(), afterAll.size());
+        Assert.assertEquals(beforeAll, afterAll);
 
     }
 

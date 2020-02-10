@@ -1,3 +1,4 @@
+
 package cat_tests.model;
 
 import com.google.common.collect.ForwardingSet;
@@ -33,5 +34,4 @@ public class Categories extends ForwardingSet<CategoryData> {
         categories.remove(category);
         return categories;
     }
-
 }

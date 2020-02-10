@@ -16,6 +16,7 @@ public class ApplicationManager {
     public void init() {
         driver = new ChromeDriver();
         navigationHelper = new NavigationHelper(driver);
+        sectionHelper = new SectionHelper(driver);
         categoryHelper = new CategoryHelper(driver);
         marketEntityHelper = new MarketEntityHelper(driver);
         targetingHelper = new TargetingHelper(driver);

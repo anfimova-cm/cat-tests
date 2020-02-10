@@ -10,8 +10,8 @@ public class SetFilterToMarketEntityDataTests extends TestBase {
     @Test (enabled = false)
     public void setFilterTest() {
 
-        SectionData section = new SectionData().withName("Карты");
-        CategoryData category = new CategoryData().withName("RMC");
+        SectionData section = new SectionData("Карты");
+        CategoryData category = new CategoryData("RMC");
         ShowcaseData showcase = new ShowcaseData().setTitle("Золотой телец");
 
         app.section().open(section);

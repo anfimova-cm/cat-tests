@@ -8,31 +8,24 @@ public class CategoryData {
     private String title;
     private int priority;
 
-    public String getUid() {
-        return uid;
+    public CategoryData(String title) {
+        this.uid = null;
+        this.title = title;
+        this.priority = 1;
     }
 
-    public CategoryData withUid(String uid) {
+    public CategoryData(String uid, String title, int priority) {
         this.uid = uid;
-        return this;
+        this.title = title;
+        this.priority = priority;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public CategoryData withName(String name) {
-        this.title = name;
-        return this;
-    }
-
-    public int getPriority() {
-        return priority;
-    }
-
-    public CategoryData withPriority(int priority) {
-        this.priority = priority;
-        return this;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
@@ -40,21 +33,18 @@ public class CategoryData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CategoryData that = (CategoryData) o;
-        return Objects.equals(title, that.title) &&
-                Objects.equals(uid, that.uid);
+        return Objects.equals(title, that.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, uid);
+        return Objects.hash(title);
     }
 
     @Override
     public String toString() {
         return "CategoryData{" +
                 "title='" + title + '\'' +
-                ", uid='" + uid + '\'' +
                 '}';
     }
-
 }
