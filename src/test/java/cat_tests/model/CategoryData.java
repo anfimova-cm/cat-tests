@@ -4,32 +4,35 @@ import java.util.Objects;
 
 public class CategoryData {
 
-    private String name;
-    private String id;
+    private String uid;
+    private String title;
+    private int priority;
 
-    public String getName() {
-        return name;
+    public String getUid() {
+        return uid;
     }
 
-    public CategoryData setName(String name) {
-        this.name = name;
+    public CategoryData withUid(String uid) {
+        this.uid = uid;
         return this;
     }
 
-    public String getId() {
-        return id;
+    public String getTitle() {
+        return title;
     }
 
-    public CategoryData setId(String id) {
-        this.id = id;
+    public CategoryData withName(String name) {
+        this.title = name;
         return this;
     }
 
-    @Override
-    public String toString() {
-        return "CategoryData{" +
-                "name='" + name + '\'' +
-                '}';
+    public int getPriority() {
+        return priority;
+    }
+
+    public CategoryData withPriority(int priority) {
+        this.priority = priority;
+        return this;
     }
 
     @Override
@@ -37,12 +40,21 @@ public class CategoryData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CategoryData that = (CategoryData) o;
-        return Objects.equals(name, that.name);
+        return Objects.equals(title, that.title) &&
+                Objects.equals(uid, that.uid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(title, uid);
+    }
+
+    @Override
+    public String toString() {
+        return "CategoryData{" +
+                "title='" + title + '\'' +
+                ", uid='" + uid + '\'' +
+                '}';
     }
 
 }

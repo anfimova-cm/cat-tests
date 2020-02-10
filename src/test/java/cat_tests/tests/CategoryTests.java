@@ -3,6 +3,7 @@ package cat_tests.tests;
 import cat_tests.model.Categories;
 import cat_tests.model.CategoryData;
 import cat_tests.model.SectionData;
+import cat_tests.model.Sections;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -16,8 +17,10 @@ public class CategoryTests extends TestBase {
 
 
     @BeforeMethod
-    public void ensurePreconditions() {
+    public Object[] ensurePreconditions() {
     // TODO: проверка наличия категории, если нет - создание
+
+        return new Object[0];
     }
 
     @Test (enabled = false)
@@ -28,18 +31,18 @@ public class CategoryTests extends TestBase {
     @Test (enabled = true)
     public void renameCategoryTest() {
 
-        SectionData section = new SectionData().setName("Скидки");
-        CategoryData category = new CategoryData().setName("Test");
-        final String name = category.getName();
-        final String testName = "Test Renamed";
+        SectionData section = new SectionData().withName("Скидки");
+        CategoryData category = new CategoryData().withName("Test");
+        String name = category.getTitle();
+        String testName = "Test Renamed";
 
-        app.goTo().openSection(section);
+        app.section().open(section);
         Categories beforeAll = app.category().all();
         app.category().settings(category);
         app.category().rename(category, testName);
 
         // Проверка
-        app.goTo().openSection(section);
+        app.section().open(section);
         Categories afterRename = app.category().all();
         assertThat(beforeAll.size(), equalTo(afterRename.size()));
 
@@ -49,10 +52,10 @@ public class CategoryTests extends TestBase {
         // Переименование обратно
         app.category().settings(category);
         app.category().rename(category, name);
-        category.setName(name);
+        category.withName(name);
 
         // Проверка, что всё осталось как было до переименования
-        app.goTo().openSection(section);
+        app.section().open(section);
         Categories afterAll = app.category().all();
         assertThat(beforeAll.size(), equalTo(afterAll.size()));
         assertThat(beforeAll, equalTo(afterAll));

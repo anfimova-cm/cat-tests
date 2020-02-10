@@ -34,7 +34,7 @@ public class ApplicationManager {
         return navigationHelper;
     }
 
-    public SectionHelper getSectionHelper() {
+    public SectionHelper section() {
         return sectionHelper;
     }
 

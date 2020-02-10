@@ -18,15 +18,4 @@ public class Sections extends ForwardingSet<SectionData> {
         return delegate;
     }
 
-    public Sections withRenamed(SectionData section) {
-        Sections sections = new Sections(this);
-        sections.add(section);
-        return sections;
-    }
-
-    public Sections without(SectionData section) {
-        Sections sections = new Sections(this);
-        sections.remove(section);
-        return sections;
-    }
 }

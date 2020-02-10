@@ -20,14 +20,14 @@ public class CategoryHelper extends HelperBase {
         type(getCategoryPage().title_input_locator, renameTo);
         click(getCategoryPage().save_changes_locator);
         // categoryCache = null;
-        category.setName(renameTo);
+        category.withName(renameTo);
         return category;
     }
 
     public void settings(CategoryData category) {
         List<WebElement> names = driver.findElements(getCategoryPage().title_locator);
         for (int i=0; i<names.size(); i++) {
-            if (names.get(i).getText().equalsIgnoreCase(category.getName())) {
+            if (names.get(i).getText().equalsIgnoreCase(category.getTitle())) {
                 List<WebElement> settings = driver.findElements(getCategoryPage().settings_locator);
                 settings.get(i).click();
                 break;
@@ -50,7 +50,7 @@ public class CategoryHelper extends HelperBase {
         List<WebElement> elements = driver.findElements(getCategoryPage().title_locator);
         for (WebElement element : elements) {
             String name = element.getText();
-            categoryCache.add(new CategoryData().setName(name));
+            categoryCache.add(new CategoryData().withName(name));
         }
         return new Categories(categoryCache);
     }
@@ -60,7 +60,7 @@ public class CategoryHelper extends HelperBase {
         List<WebElement> elements = driver.findElements(getCategoryPage().title_locator);
         for (WebElement element : elements) {
             String name = element.getText();
-            CategoryData category = new CategoryData().setName(name);
+            CategoryData category = new CategoryData().withName(name);
             categories.add(category);
         }
         return categories;
@@ -68,9 +68,9 @@ public class CategoryHelper extends HelperBase {
 
     public String searchRenamed(CategoryData category) {
         List<WebElement> names = driver.findElements(getCategoryPage().title_locator);
-        String name = "";
+        String name = null;
         for (WebElement element : names) {
-            if (element.getText().equalsIgnoreCase(category.getName())) {
+            if (element.getText().equalsIgnoreCase(category.getTitle())) {
                 name = element.getText();
                 break;
             }

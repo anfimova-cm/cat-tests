@@ -8,7 +8,12 @@ repositories {
 
 dependencies {
     implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
-    implementation group: 'org.testng', name: 'testng', version: '7.1.0'
+    implementation 'org.testng:testng:7.1.0'
     implementation 'org.hamcrest:hamcrest:2.2'
     implementation 'com.beust:jcommander:1.78'
+    implementation 'com.thoughtworks.xstream:xstream:1.4.11.1'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
+    implementation 'org.mongodb:mongo-java-driver:3.12.1'
+    implementation 'org.hibernate:hibernate-core:5.4.11.Final'
 }

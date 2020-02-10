@@ -2,35 +2,41 @@ package cat_tests.model;
 
 public class SectionData {
 
-    private String id;
+    private String uid;
     private String name;
-    private String url;
+    private int priority;
 
-    public String getId() {
-        return id;
+    public String getUid() {
+        return uid;
+    }
+
+    public SectionData withUid(String uid) {
+        this.uid = uid;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public SectionData setName(String name) {
+    public SectionData withName(String name) {
         this.name = name;
         return this;
     }
 
-    public SectionData setId(String id) {
-        this.id = id;
+    public int getPriority() {
+        return priority;
+    }
+
+    public SectionData withPriority(int priority) {
+        this.priority = priority;
         return this;
     }
 
-    public SectionData setUrl(String url) {
-        this.url = url;
-        return this;
+    @Override
+    public String toString() {
+        return "SectionData{" +
+                "name='" + name + '\'' +
+                '}';
     }
-
 }

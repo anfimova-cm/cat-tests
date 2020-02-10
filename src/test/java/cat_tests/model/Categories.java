@@ -19,16 +19,10 @@ public class Categories extends ForwardingSet<CategoryData> {
 
     @Override
     protected Set<CategoryData> delegate() {
-        return null;
+        return delegate;
     }
 
-    public Categories withRenamed(CategoryData category) {
-        Categories categories = new Categories(this);
-        categories.add(category);
-        return categories;
-    }
-
-    public Categories withAdded(CategoryData category) {
+    public Categories with(CategoryData category) {
         Categories categories = new Categories(this);
         categories.add(category);
         return categories;
