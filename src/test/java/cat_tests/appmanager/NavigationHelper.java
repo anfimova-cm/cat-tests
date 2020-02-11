@@ -9,10 +9,12 @@ public class NavigationHelper extends HelperBase {
     }
 
     public void catalog() {
+//        isClickable(getMainPage().catalog_page_locator);
         click(getMainPage().catalog_page_locator);
     }
 
     public void crumbCatalog() {
+//        isClickable(getMainPage().bread_crumb_catalog_locator);
         click(getMainPage().bread_crumb_catalog_locator);
     }
 }

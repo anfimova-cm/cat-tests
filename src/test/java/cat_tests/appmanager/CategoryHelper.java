@@ -17,10 +17,11 @@ public class CategoryHelper extends HelperBase {
 
     public void settings(CategoryData category) {
         List<WebElement> names = driver.findElements(getCategoryPage().title_locator);
-        for (int i=0; i<names.size(); i++) {
+        for (int i=0; i < names.size(); i++) {
             if (names.get(i).getText().equalsIgnoreCase(category.getTitle())) {
                 List<WebElement> settings = driver.findElements(getCategoryPage().settings_locator);
-                settings.get(i).click();
+                WebElement element = settings.get(i);
+                click(element);
                 break;
             }
         }
@@ -44,7 +45,7 @@ public class CategoryHelper extends HelperBase {
 //    }
 
     public Set<CategoryData> set() {
-        Set<CategoryData> categories = new HashSet<CategoryData>();
+        Set<CategoryData> categories = new HashSet<>();
         List<WebElement> elements = driver.findElements(getCategoryPage().title_locator);
         for (WebElement element : elements) {
             String name = element.getText();
