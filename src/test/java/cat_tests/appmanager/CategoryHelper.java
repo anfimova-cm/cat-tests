@@ -5,21 +5,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CategoryHelper extends HelperBase {
 
     public CategoryHelper(ChromeDriver driver) {
         super(driver);
-    }
-
-//    private Categories categoryCache = null;
-
-    public String rename(String renameTo) {
-        type(getCategoryPage().title_input_locator, renameTo);
-        click(getCategoryPage().save_changes_locator);
-        //category.withTitle(renameTo);
-        return renameTo;
     }
 
     public void settings(CategoryData category) {
@@ -31,9 +24,6 @@ public class CategoryHelper extends HelperBase {
                 break;
             }
         }
-    }
-
-    public void createCategory(CategoryData category) {
     }
 
     public int getCategoryCount() {
@@ -53,16 +43,34 @@ public class CategoryHelper extends HelperBase {
 //        return new Categories(categoryCache);
 //    }
 
+    public Set<CategoryData> set() {
+        Set<CategoryData> categories = new HashSet<CategoryData>();
+        List<WebElement> elements = driver.findElements(getCategoryPage().title_locator);
+        for (WebElement element : elements) {
+            String name = element.getText();
+            CategoryData category = new CategoryData().withTitle(name);
+            categories.add(category);
+        }
+        return categories;
+    }
+
     public List<CategoryData> list() {
         List<CategoryData> categories = new ArrayList<>();
         List<WebElement> elements = driver.findElements(getCategoryPage().title_locator);
         for (WebElement element : elements) {
             String name = element.getText();
-            CategoryData category = new CategoryData(name);
+            CategoryData category = new CategoryData().withTitle(name);
             categories.add(category);
         }
         return categories;
     }
+
+    public void rename(CategoryData category, String renameTo) {
+        type(getCategoryPage().title_input_locator, renameTo);
+        click(getCategoryPage().save_changes_locator);
+        category.withTitle(renameTo);
+    }
+
 
     public String searchRenamed(CategoryData category) {
         List<WebElement> names = driver.findElements(getCategoryPage().title_locator);
@@ -74,5 +82,12 @@ public class CategoryHelper extends HelperBase {
             }
         }
         return name;
+    }
+
+    public void create(CategoryData category, String title) {
+        click(getCategoryPage().add_category_locator);
+        type(getCategoryPage().title_input_locator, title);
+        click(getCategoryPage().create_button_locator);
+        category.withTitle(title);
     }
 }

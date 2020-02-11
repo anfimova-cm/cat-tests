@@ -6,12 +6,12 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
 
     private ChromeDriver driver;
-    private MarketEntityHelper marketEntityHelper;
     private NavigationHelper navigationHelper;
     private SectionHelper sectionHelper;
     private CategoryHelper categoryHelper;
-    private TargetingHelper targetingHelper;
+    private MarketEntityHelper marketEntityHelper;
     private ShowcaseHelper showcaseHelper;
+    private TargetingHelper targetingHelper;
 
     public void init() {
         driver = new ChromeDriver();
@@ -19,8 +19,8 @@ public class ApplicationManager {
         sectionHelper = new SectionHelper(driver);
         categoryHelper = new CategoryHelper(driver);
         marketEntityHelper = new MarketEntityHelper(driver);
-        targetingHelper = new TargetingHelper(driver);
         showcaseHelper = new ShowcaseHelper(driver);
+        targetingHelper = new TargetingHelper(driver);
 
         driver.manage().window().maximize();
         driver.get("https://catalog-administration-tool-gogol.web-dev.cardsmobile.ru/catalog");
@@ -47,11 +47,11 @@ public class ApplicationManager {
         return marketEntityHelper;
     }
 
-    public TargetingHelper getTargetingHelper() {
-        return targetingHelper;
-    }
-
     public ShowcaseHelper getShowcaseHelper() {
         return showcaseHelper;
+    }
+
+    public TargetingHelper getTargetingHelper() {
+        return targetingHelper;
     }
 }

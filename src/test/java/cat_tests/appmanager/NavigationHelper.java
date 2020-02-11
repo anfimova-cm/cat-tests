@@ -11,4 +11,8 @@ public class NavigationHelper extends HelperBase {
     public void catalog() {
         click(getMainPage().catalog_page_locator);
     }
+
+    public void crumbCatalog() {
+        click(getMainPage().bread_crumb_catalog_locator);
+    }
 }

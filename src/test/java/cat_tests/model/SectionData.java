@@ -4,28 +4,35 @@ import java.util.Objects;
 
 public class SectionData {
 
-    private String id;
-    private String name;
-    private String url;
+    private String uid;
+    private String title;
+    private int priority;
 
-    public SectionData(String name) {
-        this.id = null;
-        this.name = name;
-        this.url = null;
+    public String getUid() {
+        return uid;
     }
 
-    public SectionData(String id, String name, String url) {
-        this.id = id;
-        this.name = name;
-        this.url = url;
+    public SectionData withUid(String uid) {
+        this.uid = uid;
+        return this;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public SectionData withTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public SectionData withPriority(int priority) {
+        this.priority = priority;
+        return this;
     }
 
     @Override
@@ -33,18 +40,18 @@ public class SectionData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SectionData that = (SectionData) o;
-        return Objects.equals(name, that.name);
+        return Objects.equals(title, that.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(title);
     }
 
     @Override
     public String toString() {
         return "SectionData{" +
-                "name='" + name + '\'' +
+                "title='" + title + '\'' +
                 '}';
     }
 }

@@ -5,13 +5,13 @@ import cat_tests.model.SectionData;
 import cat_tests.model.ShowcaseData;
 import org.testng.annotations.Test;
 
-public class SetFilterToMarketEntityDataTests extends TestBase {
+public class targetingMarketEntityTests extends TestBase {
 
     @Test (enabled = false)
-    public void setFilterTest() {
+    public void setRestrictionsTest() {
 
-        SectionData section = new SectionData("Карты");
-        CategoryData category = new CategoryData("RMC");
+        SectionData section = new SectionData().withTitle("Карты");
+        CategoryData category = new CategoryData().withTitle("RMC");
         ShowcaseData showcase = new ShowcaseData().setTitle("Золотой телец");
 
         app.section().open(section);

@@ -14,9 +14,9 @@ public class SectionHelper extends HelperBase {
 
     public void open(SectionData section) {
         click(getSectionPage().main_menu_locator);
-        List<WebElement> names = driver.findElements(getSectionPage().title_locator);
+        List<WebElement> names = driver.findElements(getSectionPage().title_in_menu_locator);
         for (WebElement name : names) {
-            if (name.getText().equalsIgnoreCase(section.getName())) {
+            if (name.getText().equalsIgnoreCase(section.getTitle())) {
                 name.click();
                 break;
             }

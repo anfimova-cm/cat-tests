@@ -8,24 +8,31 @@ public class CategoryData {
     private String title;
     private int priority;
 
-    public CategoryData(String title) {
-        this.uid = null;
-        this.title = title;
-        this.priority = 1;
-    }
-
-    public CategoryData(String uid, String title, int priority) {
-        this.uid = uid;
-        this.title = title;
-        this.priority = priority;
-    }
-
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public CategoryData withTitle(String title) {
         this.title = title;
+        return this;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public CategoryData withUid(String uid) {
+        this.uid = uid;
+        return this;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public CategoryData withPriority(int priority) {
+        this.priority = priority;
+        return this;
     }
 
     @Override
