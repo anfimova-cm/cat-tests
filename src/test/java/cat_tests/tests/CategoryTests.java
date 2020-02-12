@@ -85,7 +85,7 @@ public class CategoryTests extends TestBase {
         app.section().open(section);
         Set<CategoryData> after = app.category().set();
         after.remove(category);
-        assertThat(before.size(), equalTo(after.size() - 1));
+        assertThat(before.size(), equalTo(after.size() + 1));
 
     }
 }
