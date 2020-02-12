@@ -21,5 +21,7 @@ public class CategoryPage {
     public final By create_button_locator =
             By.xpath(".//div[contains(@class, 'view-menu-panel')]//*[text()='Создать']");
     public final By target_page_locator = By.linkText("Перейти");
+    public final By delete_button_locator =
+            By.xpath(".//div[contains(@class, 'view-menu-panel')]//*[contains(@href, 'trash-can')]");
 
 }

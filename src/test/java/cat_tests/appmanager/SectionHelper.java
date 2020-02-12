@@ -13,12 +13,10 @@ public class SectionHelper extends HelperBase {
     }
 
     public void open(SectionData section) {
-//        isClickable(getSectionPage().main_menu_locator);
         click(getSectionPage().main_menu_locator);
         List<WebElement> names = driver.findElements(getSectionPage().title_in_menu_locator);
         for (int i=0; i < names.size(); i++) {
             if (names.get(i).getText().equalsIgnoreCase(section.getTitle())) {
-//                isClickable(names.get(i));
                 click(names.get(i));
                 break;
             }

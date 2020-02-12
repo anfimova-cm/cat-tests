@@ -34,6 +34,11 @@ public class Notes {
     Сравнивать HashSet - неупорядоченные, List - упорядоченные (одинаковые схлопываются)
     Assert.assertNotEquals(new HashSet<Object>(beforeAll), new HashSet<Object>(afterRename));
 
+    ---------------
+
+    selectByVisibleText:
+    Select selectByVisibleText = new Select (driver.findElement(By.id(“id_of_some_element”)));
+    selectByVisibleText.selectByVisibleText(“some_visible_text”);
     */
 
 }

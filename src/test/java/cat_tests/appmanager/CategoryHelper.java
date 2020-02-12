@@ -72,7 +72,6 @@ public class CategoryHelper extends HelperBase {
         category.withTitle(renameTo);
     }
 
-
     public String searchRenamed(CategoryData category) {
         List<WebElement> names = driver.findElements(getCategoryPage().title_locator);
         String name = null;
@@ -90,5 +89,10 @@ public class CategoryHelper extends HelperBase {
         type(getCategoryPage().title_input_locator, title);
         click(getCategoryPage().create_button_locator);
         category.withTitle(title);
+    }
+
+    public void delete(CategoryData category) {
+        click(getCategoryPage().delete_button_locator);
+
     }
 }

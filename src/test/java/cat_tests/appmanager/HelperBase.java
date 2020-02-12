@@ -19,7 +19,48 @@ public class HelperBase extends PageBase {
         this.driver = driver;
     }
 
-    protected void click(By locator) {
+    protected boolean isElementPresent(By locator) {
+        try {
+            driver.findElement(locator);
+            return true;
+        } catch ( NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    protected boolean isElementPresent(WebElement element) {
+        try {
+            element.isDisplayed();
+            return true;
+        } catch ( NoSuchElementException ex) {
+            return false;
+        }
+    }
+
+    protected boolean isClickable(By locator) {
+        try {
+            WebElement element = driver.findElement(locator);
+            WebDriverWait wait = new WebDriverWait(driver, 5);
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            return true;
+        } catch (ElementNotInteractableException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    protected boolean isClickable(WebElement element) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, 5);
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            return true;
+        } catch (ElementNotInteractableException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    protected void click3(By locator) {
         try {
             WebElement element = driver.findElement(locator);
             WebDriverWait wait = new WebDriverWait(driver, 5);
@@ -30,13 +71,37 @@ public class HelperBase extends PageBase {
         }
     }
 
-    protected void click(WebElement element) {
+    protected void click3(WebElement element) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, 5);
             wait.until(ExpectedConditions.elementToBeClickable(element));
             element.click();
         } catch (ElementNotInteractableException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    public void click(By locator) {
+        if (! isElementPresent(locator) || ! isClickable(locator)) {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            driver.findElement(locator).click();
+        }
+    }
+
+    public void click(WebElement element) {
+        if (! isElementPresent(element) || ! isClickable(element)) {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            element.click();
         }
     }
 
@@ -58,25 +123,6 @@ public class HelperBase extends PageBase {
         }
     }
 
-    protected boolean isElementPresent(By locator) {
-        try {
-            driver.findElement(locator);
-            return true;
-        } catch ( NoSuchElementException ex) {
-            return false;
-        }
-    }
-
-//    protected void isClickable(By locator) {
-//        try {
-//            WebElement element = driver.findElement(locator);
-//            WebDriverWait wait = new WebDriverWait(driver, 5);
-//            wait.until(ExpectedConditions.elementToBeClickable(element));
-//        } catch (ElementNotInteractableException ex) {
-//            ex.printStackTrace();
-//        }
-//    }
-//
 //    protected void isClickable(WebElement element) {
 //        try {
 //            WebDriverWait wait = new WebDriverWait(driver, 5);
