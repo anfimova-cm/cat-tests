@@ -1,13 +1,12 @@
 package cat_tests.appmanager;
 
+import cat_tests.model.Categories;
 import cat_tests.model.CategoryData;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class CategoryHelper extends HelperBase {
 
@@ -15,37 +14,12 @@ public class CategoryHelper extends HelperBase {
         super(driver);
     }
 
-    public void settings(CategoryData category) {
-        List<WebElement> names = driver.findElements(getCategoryPage().title_locator);
-        for (int i=0; i < names.size(); i++) {
-            if (names.get(i).getText().equalsIgnoreCase(category.getTitle())) {
-                List<WebElement> settings = driver.findElements(getCategoryPage().settings_locator);
-                WebElement element = settings.get(i);
-                click(element);
-                break;
-            }
-        }
-    }
-
     public int getCategoryCount() {
         return driver.findElements(getCategoryPage().title_locator).size();
     }
 
-//    public Categories all() {
-//        if (categoryCache != null) {
-//            return new Categories(categoryCache);
-//        }
-//        categoryCache = new Categories();
-//        List<WebElement> elements = driver.findElements(getCategoryPage().title_locator);
-//        for (WebElement element : elements) {
-//            String name = element.getText();
-//            categoryCache.add(new CategoryData().withTitle(name));
-//        }
-//        return new Categories(categoryCache);
-//    }
-
-    public Set<CategoryData> set() {
-        Set<CategoryData> categories = new HashSet<>();
+    public Categories set() {
+        Categories categories = new Categories();
         List<WebElement> elements = driver.findElements(getCategoryPage().title_locator);
         for (WebElement element : elements) {
             String name = element.getText();
@@ -66,22 +40,16 @@ public class CategoryHelper extends HelperBase {
         return categories;
     }
 
-    public void rename(CategoryData category, String renameTo) {
-        type(getCategoryPage().title_input_locator, renameTo);
-        click(getCategoryPage().save_changes_locator);
-        category.withTitle(renameTo);
-    }
-
-    public String searchRenamed(CategoryData category) {
+    public void settings(CategoryData category) {
         List<WebElement> names = driver.findElements(getCategoryPage().title_locator);
-        String name = null;
-        for (WebElement element : names) {
-            if (element.getText().equalsIgnoreCase(category.getTitle())) {
-                name = element.getText();
+        for (int i=0; i < names.size(); i++) {
+            if (names.get(i).getText().equalsIgnoreCase(category.getTitle())) {
+                List<WebElement> settings = driver.findElements(getCategoryPage().settings_locator);
+                WebElement element = settings.get(i);
+                click(element);
                 break;
             }
         }
-        return name;
     }
 
     public void create(CategoryData category, String title) {
@@ -91,8 +59,14 @@ public class CategoryHelper extends HelperBase {
         category.withTitle(title);
     }
 
+    public void rename(CategoryData category, String renameTo) {
+        type(getCategoryPage().title_input_locator, renameTo);
+        click(getCategoryPage().save_changes_locator);
+        category.withTitle(renameTo);
+    }
+
     public void delete(CategoryData category) {
         click(getCategoryPage().delete_button_locator);
-
     }
+
 }
