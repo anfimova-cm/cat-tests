@@ -60,12 +60,14 @@ public class CategoryHelper extends HelperBase {
     }
 
     public void rename(CategoryData category, String renameTo) {
+        settings(category);
         type(getCategoryPage().title_input_locator, renameTo);
         click(getCategoryPage().save_changes_locator);
         category.withTitle(renameTo);
     }
 
     public void delete(CategoryData category) {
+        settings(category);
         click(getCategoryPage().delete_button_locator);
     }
 
