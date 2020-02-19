@@ -12,7 +12,7 @@ public class ShowcaseData {
         return title;
     }
 
-    public ShowcaseData setTitle(String title) {
+    public ShowcaseData withTitle(String title) {
         this.title = title;
         return this;
     }

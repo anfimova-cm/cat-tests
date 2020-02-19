@@ -13,7 +13,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class CategoryTests extends TestBase {
+public class ModifyCategoryTests extends TestBase {
 
     @DataProvider(name = "dataCategoryTests")
     public Iterator<Object[]> dataProviderMethod() {
@@ -21,29 +21,14 @@ public class CategoryTests extends TestBase {
         list.add(new Object[] {
                 // Временно секция без секции
                 new SectionData().withTitle("Без секции"),
-                new CategoryData()
+                new CategoryData().withTitle("TestCategory")
         });
         return list.iterator();
     }
 
     @Test(enabled = true, dataProvider = "dataCategoryTests")
-    public void createCategoryTest(SectionData section, CategoryData category) {
-        String title = "TestCategory";
-
-        app.section().open(section);
-        Categories before = app.category().set();
-        app.category().create(category, title);
-        app.goTo().catalog();
-        app.section().open(section);
-        Categories after = app.category().set();
-        assertThat(before.size(), equalTo(after.size() - 1));
-        assertThat(before.with(category), equalTo(after));
-    }
-
-    @Test(enabled = true, dataProvider = "dataCategoryTests")
     public void renameCategoryTest(SectionData section, CategoryData category) {
         // TODO: проверка наличия категории, если нет - создание
-        category.withTitle("TestCategory");
         String testTitle = "TestCategoryRenamed";
 
         app.section().open(section);
@@ -58,18 +43,4 @@ public class CategoryTests extends TestBase {
         assertThat(category.getTitle(), equalTo(testTitle));
     }
 
-    @Test(enabled = true, dataProvider = "dataCategoryTests")
-    public void deleteCategoryTest(SectionData section, CategoryData category) {
-        category.withTitle("TestCategoryRenamed");
-
-        app.section().open(section);
-        Categories before = app.category().set();
-        app.category().delete(category);
-
-        app.goTo().catalog();
-        app.section().open(section);
-        Categories after = app.category().set();
-        assertThat(before.size(), equalTo(after.size() + 1));
-        assertThat(before.without(category), equalTo(after));
-    }
 }

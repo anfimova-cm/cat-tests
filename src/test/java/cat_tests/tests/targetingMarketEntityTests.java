@@ -12,7 +12,7 @@ public class targetingMarketEntityTests extends TestBase {
 
         SectionData section = new SectionData().withTitle("Карты");
         CategoryData category = new CategoryData().withTitle("RMC");
-        ShowcaseData showcase = new ShowcaseData().setTitle("Золотой телец");
+        ShowcaseData showcase = new ShowcaseData().withTitle("Золотой телец");
 
         app.section().open(section);
         //app.category().showCategory(category);

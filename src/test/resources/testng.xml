@@ -3,13 +3,9 @@
 <suite name="Suite1" verbose="1" >
     <test name="Categories" >
         <classes>
-            <class name="cat_tests.tests.CategoryTests" />
-        </classes>
-    </test>
-
-    <test name="MarketEntities">
-        <classes>
-            <class name="cat_tests.tests.targetingMarketEntityTests"/>
+            <class name="cat_tests.tests.CreateCategoryTests" />
+            <class name="cat_tests.tests.ModifyCategoryTests" />
+            <class name="cat_tests.tests.DeleteCategoryTests" />
         </classes>
     </test>
 </suite>
