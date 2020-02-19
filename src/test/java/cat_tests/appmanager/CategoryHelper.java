@@ -14,19 +14,20 @@ public class CategoryHelper extends HelperBase {
         super(driver);
     }
 
-    public int getCategoryCount() {
-        return driver.findElements(getCategoryPage().title_locator).size();
-    }
+    private Categories categoryCache = null;
 
     public Categories set() {
-        Categories categories = new Categories();
+        if (categoryCache != null) {
+            return new Categories(categoryCache);
+        }
+        categoryCache = new Categories();
         List<WebElement> elements = driver.findElements(getCategoryPage().title_locator);
         for (WebElement element : elements) {
             String name = element.getText();
             CategoryData category = new CategoryData().withTitle(name);
-            categories.add(category);
+            categoryCache.add(category);
         }
-        return categories;
+        return new Categories(categoryCache);
     }
 
     public List<CategoryData> list() {
@@ -57,6 +58,7 @@ public class CategoryHelper extends HelperBase {
         type(getCategoryPage().title_input_locator, title);
         click(getCategoryPage().create_button_locator);
         category.withTitle(title);
+        categoryCache = null;
     }
 
     public void rename(CategoryData category, String renameTo) {
@@ -64,11 +66,13 @@ public class CategoryHelper extends HelperBase {
         type(getCategoryPage().title_input_locator, renameTo);
         click(getCategoryPage().save_changes_locator);
         category.withTitle(renameTo);
+        categoryCache = null;
     }
 
     public void delete(CategoryData category) {
         settings(category);
         click(getCategoryPage().delete_button_locator);
+        categoryCache = null;
     }
 
 }

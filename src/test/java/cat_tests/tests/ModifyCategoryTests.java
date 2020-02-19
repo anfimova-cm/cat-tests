@@ -3,6 +3,8 @@ package cat_tests.tests;
 import cat_tests.model.Categories;
 import cat_tests.model.CategoryData;
 import cat_tests.model.SectionData;
+import org.testng.IDataProviderInterceptor;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -24,6 +26,14 @@ public class ModifyCategoryTests extends TestBase {
                 new CategoryData().withTitle("TestCategory")
         });
         return list.iterator();
+    }
+
+    @BeforeMethod
+    public void ensurePreconditions(SectionData section) {
+        app.section().open(section);
+        if (app.category().set().size() == 0) {
+            app.category().create(new CategoryData(), "TestCategory");
+        }
     }
 
     @Test(enabled = true, dataProvider = "dataCategoryTests")
