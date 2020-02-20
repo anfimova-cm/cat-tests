@@ -32,7 +32,7 @@ public class ModifyCategoryTests extends TestBase {
     public void ensurePreconditions(SectionData section) {
         app.section().open(section);
         if (app.category().set().size() == 0) {
-            app.category().create(new CategoryData(), "TestCategory");
+            app.category().create(new CategoryData().withTitle("TestCategory"));
         }
     }
 
@@ -43,7 +43,7 @@ public class ModifyCategoryTests extends TestBase {
 
         app.section().open(section);
         Categories before = app.category().set();
-        app.category().rename(category, testTitle);
+        app.category().rename(category.withTitle(testTitle));
 
         app.goTo().catalog();
         app.section().open(section);

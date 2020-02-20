@@ -40,18 +40,20 @@ public class CategoryData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CategoryData that = (CategoryData) o;
-        return Objects.equals(title, that.title);
+        return Objects.equals(uid, that.uid) &&
+                Objects.equals(title, that.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title);
+        return Objects.hash(uid, title);
     }
 
     @Override
     public String toString() {
         return "CategoryData{" +
-                "title='" + title + '\'' +
+                "uid='" + uid + '\'' +
+                ", title='" + title + '\'' +
                 '}';
     }
 }

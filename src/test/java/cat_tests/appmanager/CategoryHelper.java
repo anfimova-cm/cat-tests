@@ -21,10 +21,12 @@ public class CategoryHelper extends HelperBase {
             return new Categories(categoryCache);
         }
         categoryCache = new Categories();
-        List<WebElement> elements = driver.findElements(getCategoryPage().title_locator);
-        for (WebElement element : elements) {
-            String name = element.getText();
-            CategoryData category = new CategoryData().withTitle(name);
+        // TODO: как использовать foreach, а не index?
+        List<WebElement> names = driver.findElements(getCategoryPage().title_locator);
+        for (int i = 0; i < names.size(); i++) {
+            String name = names.get(i).getText();
+            String uid = driver.findElements(getCategoryPage().uid_locator).get(i).getText();
+            CategoryData category = new CategoryData().withUid(uid).withTitle(name);
             categoryCache.add(category);
         }
         return new Categories(categoryCache);
@@ -43,17 +45,15 @@ public class CategoryHelper extends HelperBase {
 
     public void settings(CategoryData category) {
         List<WebElement> names = driver.findElements(getCategoryPage().title_locator);
-        for (int i=0; i < names.size(); i++) {
+        for (int i = 0; i < names.size(); i++) {
             if (names.get(i).getText().equalsIgnoreCase(category.getTitle())) {
-                List<WebElement> settings = driver.findElements(getCategoryPage().settings_locator);
-                WebElement element = settings.get(i);
-                click(element);
-                break;
+                click(driver.findElements(getCategoryPage().settings_locator).get(i));
             }
         }
     }
 
-    public void create(CategoryData category, String title) {
+    public void create(CategoryData category) {
+        String title = category.getTitle();
         click(getCategoryPage().add_category_locator);
         type(getCategoryPage().title_input_locator, title);
         click(getCategoryPage().create_button_locator);
@@ -61,11 +61,12 @@ public class CategoryHelper extends HelperBase {
         categoryCache = null;
     }
 
-    public void rename(CategoryData category, String renameTo) {
+    public void rename(CategoryData category) {
+        String newTitle = category.getTitle();
         settings(category);
-        type(getCategoryPage().title_input_locator, renameTo);
+        type(getCategoryPage().title_input_locator, newTitle);
         click(getCategoryPage().save_changes_locator);
-        category.withTitle(renameTo);
+        category.withTitle(newTitle);
         categoryCache = null;
     }
 

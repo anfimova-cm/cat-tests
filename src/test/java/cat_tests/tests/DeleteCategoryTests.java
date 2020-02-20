@@ -28,10 +28,10 @@ public class DeleteCategoryTests extends TestBase {
     }
 
     @BeforeMethod
-    public void ensurePreconditions(SectionData section) {
-        app.section().open(section);
+    public void ensurePreconditions() {
         if (app.category().set().size() == 0) {
-            app.category().create(new CategoryData(), "TestCategoryRenamed");
+            app.section().open(new SectionData().withTitle("Без секции"));
+            app.category().create(new CategoryData().withTitle("TestCategoryRenamed"));
         }
     }
 
