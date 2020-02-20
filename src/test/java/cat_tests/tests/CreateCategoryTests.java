@@ -37,8 +37,8 @@ public class CreateCategoryTests extends TestBase {
         app.section().open(section);
         Categories after = app.category().set();
         assertThat(before.size(), equalTo(after.size() - 1));
-        // TODO: category to createdCategory
-        assertThat(before.with(category), equalTo(after));
+        assertThat(before.with(after.stream().filter(c -> c.getTitle().equals(title)).findFirst().get()),
+                equalTo(after));
     }
 
 }

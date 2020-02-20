@@ -45,7 +45,9 @@ public class DeleteCategoryTests extends TestBase {
         app.section().open(section);
         Categories after = app.category().set();
         assertThat(before.size(), equalTo(after.size() + 1));
-        assertThat(before.without(category), equalTo(after));
+        assertThat(before.without(
+                before.stream().filter(c -> c.getTitle().equals(category.getTitle())).findFirst().get()),
+                equalTo(after));
     }
 
 }
