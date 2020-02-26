@@ -20,8 +20,7 @@ public class DeleteCategoryTests extends TestBase {
     public Iterator<Object[]> dataProviderMethod() {
         List<Object[]> list = new ArrayList<Object[]>();
         list.add(new Object[] {
-                // Временно секция без секции
-                new SectionData().withTitle("Без секции"),
+                new SectionData().withTitle("Транспорт"),
                 new CategoryData().withTitle("TestCategoryRenamed")
         });
         return list.iterator();
@@ -30,7 +29,7 @@ public class DeleteCategoryTests extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
         if (app.category().set().size() == 0) {
-            app.section().open(new SectionData().withTitle("Без секции"));
+            app.section().open(new SectionData().withTitle("Транспорт"));
             app.category().create(new CategoryData().withTitle("TestCategoryRenamed"));
         }
     }

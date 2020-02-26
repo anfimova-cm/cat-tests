@@ -19,8 +19,7 @@ public class CreateCategoryTests extends TestBase {
     public Iterator<Object[]> dataProviderMethod() {
         List<Object[]> list = new ArrayList<Object[]>();
         list.add(new Object[] {
-            // Временно секция без секции
-            new SectionData().withTitle("Без секции"),
+            new SectionData().withTitle("Транспорт"),
             new CategoryData()
         });
         return list.iterator();
