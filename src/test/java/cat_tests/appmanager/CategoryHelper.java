@@ -61,12 +61,11 @@ public class CategoryHelper extends HelperBase {
         categoryCache = null;
     }
 
-    public void rename(CategoryData category) {
-        String newTitle = category.getTitle();
+    public void rename(CategoryData category, String title) {
         settings(category);
-        type(getCategoryPage().title_input_locator, newTitle);
+        type(getCategoryPage().title_input_locator, title);
         click(getCategoryPage().save_changes_locator);
-        category.withTitle(newTitle);
+        category.withTitle(title);
         categoryCache = null;
     }
 

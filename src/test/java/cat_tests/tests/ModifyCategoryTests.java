@@ -40,13 +40,15 @@ public class ModifyCategoryTests extends TestBase {
 
         app.section().open(section);
         Categories before = app.category().set();
-        app.category().rename(category.withTitle(testTitle));
+        app.category().rename(category, testTitle);
 
         app.goTo().catalog();
         app.section().open(section);
         Categories after = app.category().set();
         assertThat(before.size(), equalTo(after.size()));
-        assertThat(before.without(category), equalTo(after.without(category)));
+        // сделать удаление по id
+        assertThat(before.without(before.stream().filter(c -> c.getTitle().equals(category.getTitle())).findFirst().get()),
+                equalTo(after.without(after.stream().filter(c -> c.getTitle().equals(category.getTitle())).findFirst().get())));
         assertThat(category.getTitle(), equalTo(testTitle));
     }
 

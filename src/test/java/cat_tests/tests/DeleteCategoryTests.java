@@ -43,6 +43,7 @@ public class DeleteCategoryTests extends TestBase {
         app.goTo().catalog();
         app.section().open(section);
         Categories after = app.category().set();
+        // не работает сравнение по размеру
         assertThat(before.size(), equalTo(after.size() + 1));
         assertThat(before.without(
                 before.stream().filter(c -> c.getTitle().equals(category.getTitle())).findFirst().get()),
