@@ -18,6 +18,7 @@ public class CreateCategoryTests extends TestBase {
     @DataProvider(name = "dataCategoryTests")
     public Iterator<Object[]> dataProviderMethod() {
         List<Object[]> list = new ArrayList<Object[]>();
+        // TODO: сделать чтение данных из json
         list.add(new Object[] {
             new SectionData().withTitle("Транспорт"),
             new CategoryData()
