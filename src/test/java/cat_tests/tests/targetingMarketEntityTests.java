@@ -16,10 +16,10 @@ public class targetingMarketEntityTests extends TestBase {
 
         app.section().open(section);
         //app.category().showCategory(category);
-        app.getShowcaseHelper().selectShowcase(showcase);
-        app.getMarketEntityHelper().openMarketEntityPage();
+        app.getShowcaseHelper().select(showcase);
+        app.getMarketEntityHelper().openPage();
         app.getTargetingHelper().setShowNever();
-        app.getMarketEntityHelper().saveMarketEntityChanges();
+        app.getMarketEntityHelper().saveChanges();
     }
 
 

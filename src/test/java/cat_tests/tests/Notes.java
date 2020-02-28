@@ -1,11 +1,10 @@
 package cat_tests.tests;
 
-import org.testng.annotations.Test;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class Notes {
 
@@ -19,5 +18,8 @@ public class Notes {
     Select selectByVisibleText = new Select (driver.findElement(By.id(“id_of_some_element”)));
     selectByVisibleText.selectByVisibleText(“some_visible_text”);
     */
+
+    public static void main(String[] args) {
+    }
 
 }

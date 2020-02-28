@@ -45,8 +45,8 @@ public class ModifyCategoryTests extends TestBase {
         app.goTo().catalog();
         app.section().open(section);
         Categories after = app.category().set();
+        // TODO: вылечить сравнение размеров
         assertThat(before.size(), equalTo(after.size()));
-        // TODO: сделать удаление по id
         assertThat(before.without(before.stream().filter(c -> c.getUid().equals(category.getUid())).findFirst().get()),
                 equalTo(after.without(after.stream().filter(c -> c.getUid().equals(category.getUid())).findFirst().get())));
         assertThat(category.getTitle(), equalTo(testTitle));

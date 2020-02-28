@@ -1,5 +1,6 @@
 package cat_tests.tests;
 
+import com.codeborne.selenide.Selenide;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.*;
@@ -25,15 +26,15 @@ public class SelenideTest {
         $(locator).sendKeys(text);
     }
 
-    private static void select() {
+    private static void select(String title) {
         click(catalog);
         click(section_title);
-        $$(drop_title).findBy(text("Транспорт")).click();
+        $$(drop_title).findBy(text(title)).click();
     }
 
-    private static void create() {
+    private static void create(String title) {
         click(plus);
-        type(input, "Title");
+        type(input, title);
         click(create);
     }
 
@@ -43,9 +44,9 @@ public class SelenideTest {
 
     public static void main(String[] args) {
         open(url);
-        select();
-        create();
-        select();
+        select("Транспорт");
+        create("Category");
+        select("Транспорт");
         $$(category_title).shouldHaveSize(3);
     }
 

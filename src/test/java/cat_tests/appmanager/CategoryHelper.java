@@ -2,15 +2,18 @@ package cat_tests.appmanager;
 
 import cat_tests.model.Categories;
 import cat_tests.model.CategoryData;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static com.codeborne.selenide.Selenide.*;
 
 public class CategoryHelper extends HelperBase {
 
-    public CategoryHelper(ChromeDriver driver) {
+    public CategoryHelper(Selenide driver) {
         super(driver);
     }
 
@@ -21,57 +24,56 @@ public class CategoryHelper extends HelperBase {
             return new Categories(categoryCache);
         }
         categoryCache = new Categories();
-        // TODO: как использовать foreach, а не index?
-        List<WebElement> names = driver.findElements(getCategoryPage().title_locator);
+        if ($$(getCategoryPage().title).size() == 0) {
+            // TODO: names.size() = 0, если без sleep
+            sleep(2000);
+        }
+        List<SelenideElement> names = $$(getCategoryPage().title);
+        // TODO: как использовать не index?
         for (int i = 0; i < names.size(); i++) {
             String name = names.get(i).getText();
-            String uid = driver.findElements(getCategoryPage().uid_locator).get(i).getText();
+            String uid = $$(getCategoryPage().uid).get(i).getText();
             CategoryData category = new CategoryData().withUid(uid).withTitle(name);
             categoryCache.add(category);
         }
         return new Categories(categoryCache);
     }
 
-    public List<CategoryData> list() {
-        List<CategoryData> categories = new ArrayList<>();
-        List<WebElement> elements = driver.findElements(getCategoryPage().title_locator);
-        for (WebElement element : elements) {
-            String name = element.getText();
-            CategoryData category = new CategoryData().withTitle(name);
-            categories.add(category);
-        }
-        return categories;
-    }
-
     public void settings(CategoryData category) {
-        List<WebElement> names = driver.findElements(getCategoryPage().title_locator);
+        List<SelenideElement> names = $$(getCategoryPage().title);
         for (int i = 0; i < names.size(); i++) {
             if (names.get(i).getText().equalsIgnoreCase(category.getTitle())) {
-                click(driver.findElements(getCategoryPage().settings_locator).get(i));
+                click($$(getCategoryPage().settings).get(i));
             }
         }
     }
 
     public void create(CategoryData category) {
         String title = category.getTitle();
-        click(getCategoryPage().add_category_locator);
-        type(getCategoryPage().title_input_locator, title);
-        click(getCategoryPage().create_button_locator);
-        category.withTitle(title);
+        click(getCategoryPage().add_category);
+        type(getCategoryPage().title_input, title);
+        click(getCategoryPage().create_button);
+        // TODO: без sleep не тот урл
+        sleep(2000);
+        String url = WebDriverRunner.url();
+        // TODO: покрасивее сделать
+        List<String> splittedUrls = Arrays.asList(url.split("/"));
+        String uid = splittedUrls.get(splittedUrls.size() - 1);
+        category.withUid(uid).withTitle(title);
         categoryCache = null;
     }
 
     public void rename(CategoryData category, String title) {
         settings(category);
-        type(getCategoryPage().title_input_locator, title);
-        click(getCategoryPage().save_changes_locator);
+        type(getCategoryPage().title_input, title);
+        click(getCategoryPage().save_changes);
         category.withTitle(title);
         categoryCache = null;
     }
 
     public void delete(CategoryData category) {
         settings(category);
-        click(getCategoryPage().delete_button_locator);
+        click(getCategoryPage().delete_button);
         categoryCache = null;
     }
 

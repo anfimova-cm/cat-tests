@@ -1,20 +1,25 @@
 package cat_tests.appmanager;
 
-import org.openqa.selenium.chrome.ChromeDriver;
-import java.util.concurrent.TimeUnit;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+
+import static com.codeborne.selenide.Selenide.open;
 
 public class ApplicationManager {
 
-    private ChromeDriver driver;
+//    private ChromeDriver driver;
     private NavigationHelper navigationHelper;
     private SectionHelper sectionHelper;
     private CategoryHelper categoryHelper;
     private MarketEntityHelper marketEntityHelper;
     private ShowcaseHelper showcaseHelper;
     private TargetingHelper targetingHelper;
+    private Selenide driver;
 
     public void init() {
-        driver = new ChromeDriver();
+
+//        driver = new ChromeDriver();
+        driver = new Selenide();
         navigationHelper = new NavigationHelper(driver);
         sectionHelper = new SectionHelper(driver);
         categoryHelper = new CategoryHelper(driver);
@@ -22,13 +27,18 @@ public class ApplicationManager {
         showcaseHelper = new ShowcaseHelper(driver);
         targetingHelper = new TargetingHelper(driver);
 
-        driver.manage().window().maximize();
-        driver.get("https://catalog-administration-tool-gogol.web-dev.cardsmobile.ru/catalog");
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Configuration.browser="chrome";
+        Configuration.startMaximized=true;
+        open("https://catalog-administration-tool-gogol.web-dev.cardsmobile.ru/catalog");
+
+//        driver.manage().window().maximize();
+//        driver.get("https://catalog-administration-tool-gogol.web-dev.cardsmobile.ru/catalog");
+//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     public void stop() {
-        driver.quit();
+//        Selenide закрывает сам
+//        close();
     }
 
     public NavigationHelper goTo() {

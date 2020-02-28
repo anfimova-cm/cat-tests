@@ -1,20 +1,22 @@
 package cat_tests.appmanager;
 
 import cat_tests.model.SectionData;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Selenide.$$;
+
 public class SectionHelper extends HelperBase {
 
-    public SectionHelper(ChromeDriver driver) {
+    public SectionHelper(Selenide driver) {
         super(driver);
     }
 
     public void open(SectionData section) {
-        click(getSectionPage().main_menu_locator);
-        List<WebElement> names = driver.findElements(getSectionPage().title_in_menu_locator);
+        click(getSectionPage().main_menu);
+        List<SelenideElement> names = $$(getSectionPage().title_in_menu);
         for (int i=0; i < names.size(); i++) {
             if (names.get(i).getText().equalsIgnoreCase(section.getTitle())) {
                 click(names.get(i));

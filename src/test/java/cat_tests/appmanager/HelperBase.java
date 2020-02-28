@@ -1,28 +1,25 @@
 package cat_tests.appmanager;
 
 import cat_tests.pages.PageBase;
-import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.enabled;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class HelperBase extends PageBase {
 
-    protected ChromeDriver driver;
+    protected Selenide driver;
 
-    public HelperBase(ChromeDriver driver) {
+    public HelperBase(Selenide driver) {
         this.driver = driver;
     }
 
+    /**
     protected boolean isElementPresent(By locator) {
         try {
             driver.findElement(locator);
@@ -64,27 +61,6 @@ public class HelperBase extends PageBase {
         }
     }
 
-    protected void click3(By locator) {
-        try {
-            WebElement element = driver.findElement(locator);
-            WebDriverWait wait = new WebDriverWait(driver, 5);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
-            element.click();
-        } catch (ElementNotInteractableException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    protected void click3(WebElement element) {
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, 5);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
-            element.click();
-        } catch (ElementNotInteractableException ex) {
-            ex.printStackTrace();
-        }
-    }
-
     public void click(By locator) {
         if (! isElementPresent(locator) || ! isClickable(locator)) {
             try {
@@ -119,21 +95,31 @@ public class HelperBase extends PageBase {
             }
         }
     }
+    **/
 
-    protected void attach(By locator, File file) {
-        if (file != null) {
-            driver.findElement(locator).sendKeys(file.getAbsolutePath());
+    protected static void click(By locator) {
+        $(locator).shouldBe(visible).shouldBe(enabled).click();
+    }
 
+    protected static void click(SelenideElement element) {
+        element.shouldBe(visible).shouldBe(enabled).click();
+    }
+
+    protected static void type(By locator, String text) {
+        click(locator);
+        if (text != null) {
+            String existingText = $(locator).getText();
+            if (!text.equals(existingText)) {
+                $(locator).clear();
+                $(locator).sendKeys(text);
+            }
         }
     }
 
-//    protected void isClickable(WebElement element) {
-//        try {
-//            WebDriverWait wait = new WebDriverWait(driver, 5);
-//            wait.until(ExpectedConditions.elementToBeClickable(element));
-//        } catch (ElementNotInteractableException ex) {
-//            ex.printStackTrace();
-//        }
-//    }
+    protected void attach(By locator, File file) {
+        if (file != null) {
+            $(locator).sendKeys(file.getAbsolutePath());
+        }
+    }
 
 }
