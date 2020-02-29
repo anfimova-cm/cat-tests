@@ -2,8 +2,6 @@ package cat_tests.appmanager;
 
 import cat_tests.model.ShowcaseData;
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ShowcaseHelper extends HelperBase {
 

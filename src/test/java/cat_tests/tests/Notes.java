@@ -1,11 +1,5 @@
 package cat_tests.tests;
 
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.WebDriverRunner;
-
-import java.util.Arrays;
-import java.util.List;
-
 public class Notes {
 
     /*

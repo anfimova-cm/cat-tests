@@ -1,8 +1,6 @@
 package cat_tests.appmanager;
 
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class MarketEntityHelper extends HelperBase {
 

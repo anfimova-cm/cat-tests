@@ -1,6 +1,5 @@
 package cat_tests.tests;
 
-import com.codeborne.selenide.Selenide;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.*;
