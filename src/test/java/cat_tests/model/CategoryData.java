@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class CategoryData {
 
+    private String parentUid;
     private String uid;
     private String title;
     private int priority;
