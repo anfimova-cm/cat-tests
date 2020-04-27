@@ -8,13 +8,14 @@ import static com.codeborne.selenide.Selenide.open;
 public class ApplicationManager {
 
 //    private ChromeDriver driver;
+    private Selenide driver;
     private NavigationHelper navigationHelper;
     private SectionHelper sectionHelper;
     private CategoryHelper categoryHelper;
     private MarketEntityHelper marketEntityHelper;
     private ShowcaseHelper showcaseHelper;
     private TargetingHelper targetingHelper;
-    private Selenide driver;
+    private MongoHelper mongoHelper;
 
     public void init() {
 
@@ -26,6 +27,7 @@ public class ApplicationManager {
         marketEntityHelper = new MarketEntityHelper(driver);
         showcaseHelper = new ShowcaseHelper(driver);
         targetingHelper = new TargetingHelper(driver);
+        mongoHelper = new MongoHelper();
 
         Configuration.browser="chrome";
         Configuration.startMaximized=true;
@@ -63,5 +65,9 @@ public class ApplicationManager {
 
     public TargetingHelper getTargetingHelper() {
         return targetingHelper;
+    }
+
+    public MongoHelper getMongoHelper() {
+        return mongoHelper;
     }
 }
