@@ -1,5 +1,6 @@
 .gradle
 /build/
+/src/test/java/cat_tests/trash/
 
 # Ignore Gradle GUI config
 gradle-app.setting
