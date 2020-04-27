@@ -1,0 +1,9 @@
+{
+  "_id": {},
+  "_class": "ru.cardsmobile.market.entity.Section",
+  "uid": "transport",
+  "priority": 8,
+  "name": "Транспорт",
+  "hidden": false,
+  "segments": []
+}

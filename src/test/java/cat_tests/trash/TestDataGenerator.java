@@ -1,4 +1,4 @@
-package cat_tests.tests;
+package cat_tests.trash;
 
 import java.io.*;
 import java.util.ArrayList;

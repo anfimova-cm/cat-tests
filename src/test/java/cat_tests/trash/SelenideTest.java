@@ -1,4 +1,4 @@
-package cat_tests.tests;
+package cat_tests.trash;
 
 import org.openqa.selenium.By;
 

@@ -1,11 +1,16 @@
 package cat_tests.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.Objects;
 
 public class CategoryData {
 
+    @Expose
     private String parentUid;
+    @Expose
     private String uid;
+    @Expose
     private String title;
     private int priority;
 

@@ -1,10 +1,14 @@
 package cat_tests.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.Objects;
 
 public class SectionData {
 
+    @Expose
     private String uid;
+    @Expose
     private String title;
     private int priority;
 
