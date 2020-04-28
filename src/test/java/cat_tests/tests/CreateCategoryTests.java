@@ -20,7 +20,7 @@ public class CreateCategoryTests extends TestBase {
         List<Object[]> list = new ArrayList<Object[]>();
         // TODO: сделать чтение данных из json
         list.add(new Object[] {
-            new SectionData().withTitle("Транспорт"),
+            new SectionData().withTitle("Тест"),
             new CategoryData()
         });
         return list.iterator();

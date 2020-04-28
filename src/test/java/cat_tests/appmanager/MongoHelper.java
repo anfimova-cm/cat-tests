@@ -11,30 +11,17 @@ import org.bson.Document;
 import java.io.*;
 import java.util.List;
 
+import static java.lang.System.getProperty;
+
 public class MongoHelper {
 
-
-    public static void main(String[] args) {
-
-    }
-
-    public static void readConfig() throws IOException {
-        FileReader fr = new FileReader("./src/test/java/cat_tests/conf/mongo.properties");
-        BufferedReader reader = new BufferedReader(fr);
-        int data = reader.read();
-        while (data != -1) {
-            data = reader.read();
-        }
-        reader.close();
-    }
-
-    public static void connectToMongo() {
-        MongoClient mongo = new MongoClient("cm-mongo01x-t.test.cardsmobile.ru", 27017);
+    public static void connectToMongo(String host, Integer port) {
+        MongoClient mongo = new MongoClient(host, port);
     }
 
     public static void connectToSection(MongoClient mongo) {
         MongoCollection<Document> sectionsCollection =
-                mongo.getDatabase("gogol").getCollection("market_section");
+                mongo.getDatabase(getProperty("market.database")).getCollection("market_section");
     }
 
     public static void readSection(MongoCollection<Document> sectionsCollection) {

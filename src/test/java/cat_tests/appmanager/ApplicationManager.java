@@ -3,44 +3,46 @@ package cat_tests.appmanager;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
 import static com.codeborne.selenide.Selenide.open;
 
 public class ApplicationManager {
 
-//    private ChromeDriver driver;
-    private Selenide driver;
+    private Properties properties;
     private NavigationHelper navigationHelper;
     private SectionHelper sectionHelper;
     private CategoryHelper categoryHelper;
     private MarketEntityHelper marketEntityHelper;
     private ShowcaseHelper showcaseHelper;
     private TargetingHelper targetingHelper;
-    private MongoHelper mongoHelper;
 
-    public void init() {
+    public ApplicationManager() {
+        properties = new Properties();
+    }
 
-//        driver = new ChromeDriver();
-        driver = new Selenide();
+    public void init() throws IOException {
+
+        Selenide driver = new Selenide();
         navigationHelper = new NavigationHelper(driver);
         sectionHelper = new SectionHelper(driver);
         categoryHelper = new CategoryHelper(driver);
         marketEntityHelper = new MarketEntityHelper(driver);
         showcaseHelper = new ShowcaseHelper(driver);
         targetingHelper = new TargetingHelper(driver);
-        mongoHelper = new MongoHelper();
 
-        Configuration.browser="chrome";
-        Configuration.startMaximized=true;
-        open("https://catalog-administration-tool-gogol.web-dev.cardsmobile.ru/catalog");
+        properties.load(new FileReader(new File("src/test/java/cat_tests/conf/test.properties")));
 
-//        driver.manage().window().maximize();
-//        driver.get("https://catalog-administration-tool-gogol.web-dev.cardsmobile.ru/catalog");
-//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Configuration.browser = properties.getProperty("browser.type");
+        Configuration.startMaximized = Boolean.parseBoolean(properties.getProperty("browser.startMaximized"));
+        open(properties.getProperty("cat.url"));
     }
 
     public void stop() {
-//        Selenide закрывает сам
-//        close();
+//        close(); Selenide закрывает сам
     }
 
     public NavigationHelper goTo() {
@@ -67,7 +69,4 @@ public class ApplicationManager {
         return targetingHelper;
     }
 
-    public MongoHelper getMongoHelper() {
-        return mongoHelper;
-    }
 }
