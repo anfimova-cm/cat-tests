@@ -37,12 +37,11 @@ public class ApplicationManager {
         properties.load(new FileReader(new File("src/test/java/cat_tests/conf/test.properties")));
 
         Configuration.browser = properties.getProperty("browser.type");
-        Configuration.startMaximized = Boolean.parseBoolean(properties.getProperty("browser.startMaximized"));
+        Configuration.startMaximized = Boolean.parseBoolean(properties.getProperty("browser.maximized"));
         open(properties.getProperty("cat.url"));
     }
 
     public void stop() {
-//        close(); Selenide закрывает сам
     }
 
     public NavigationHelper goTo() {
