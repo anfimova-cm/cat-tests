@@ -34,7 +34,7 @@ public class ApplicationManager {
         showcaseHelper = new ShowcaseHelper(driver);
         targetingHelper = new TargetingHelper(driver);
 
-        properties.load(new FileReader(new File("src/test/java/cat_tests/conf/test.properties")));
+        properties.load(new FileReader(new File("src/test/resources/test.properties")));
 
         Configuration.browser = properties.getProperty("browser.type");
         Configuration.startMaximized = Boolean.parseBoolean(properties.getProperty("browser.maximized"));
